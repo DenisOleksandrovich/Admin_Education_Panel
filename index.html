@@ -1,0 +1,440 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адміністративна панель | Система дипломнх робіт</title>
+
+  <link rel="stylesheet" href="index_style.css">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="index_animation.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      <div class="user-profile" onclick="window.location.href='account.html'">
+        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
+        <div class="user-details">
+            <span class="menu-nav-text user-name">Дерус Денис Олександрович</span>
+            <span class="menu-nav-text user-list-number"> 5 * АС-224</span>
+
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="menu-nav-text nav-section-title">Головне</div>
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon">📊</span>
+            <span class="menu-nav-text">Огляд</span>
+          </a>
+          <a href="students.html" class="nav-link">
+            <span class="nav-icon">👥</span>
+            <span class="menu-nav-text">Студенти</span>
+          </a>
+          <a href="teachers.html" class="nav-link">
+            <span class="nav-icon">👨‍🏫</span>
+            <span class="menu-nav-text">Викладачі</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Управління</div>
+          <a href="tasks.html" class="nav-link">
+            <span class="nav-icon">✅</span>
+            <span class="menu-nav-text">Завдання</span>
+          </a>
+          <a href="calendar.html" class="nav-link">
+            <span class="nav-icon">📆</span>
+            <span class="menu-nav-text">Календар</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Налаштування</div>
+          <a href="account.html" class="nav-link">
+            <span class="nav-icon">👤</span>
+            <span class="menu-nav-text">Профіль</span>
+          </a>
+          <a href="notification.html" class="nav-link">
+            <span class="nav-icon">🔔</span>
+            <span class="menu-nav-text">Сповіщення</span>
+          </a>
+          <a href="safety_page.html" class="nav-link">
+            <span class="nav-icon">🔒</span>
+            <span class="menu-nav-text">Безпека</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-support" onclick="toggleChat()">
+          <div class="support-icon">💬</div>
+          <div class="support-info">
+            <div class="menu-nav-text support-title">Підтримка</div>
+            <div class="menu-nav-text support-text">Чат і соц. мережі</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid">Загальний огляд</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title">Всього студентів</h3>
+              <div class="stat-icon">👨‍🎓</div>
+            </div>
+            <p class="stat-value">126</p>
+            <p class="stat-description">+8 за останній місяць</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title">Активних робіт</h3>
+              <div class="stat-icon">📝</div>
+            </div>
+            <p class="stat-value">87</p>
+            <p class="stat-description">52 потребують уваги</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title">Перевірка необхідна</h3>
+              <div class="stat-icon">🔍</div>
+            </div>
+            <p class="stat-value">24</p>
+            <p class="stat-description">12 з термінами, що спливають</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title">Завершено робіт</h3>
+              <div class="stat-icon">✅</div>
+            </div>
+            <p class="stat-value">39</p>
+            <p class="stat-description">+5 за останній тиждень</p>
+          </div>
+        </div>
+
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Останні завантаження</h2>
+              <a href="#" class="card-action">Показати всі</a>
+            </div>
+            <ul class="task-list">
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Літературний огляд</h3>
+                  <span class="task-status status-in-review">На перевірці</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">КП</div>
+                    <span>Петров Костянтин</span>
+                  </div>
+                  <div class="task-date">Завантажено: 20.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Вступ</h3>
+                  <span class="task-status status-needs-revision">Потребує доопрацювання</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">АС</div>
+                    <span>Сидорова Анна</span>
+                  </div>
+                  <div class="task-date">Завантажено: 19.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Методологія дослідження</h3>
+                  <span class="task-status status-completed">Прийнято</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">МІ</div>
+                    <span>Іванов Михайло</span>
+                  </div>
+                  <div class="task-date">Завантажено: 18.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Практична частина</h3>
+                  <span class="task-status status-in-review">На перевірці</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">ЄК</div>
+                    <span>Козлова Єкатерина</span>
+                  </div>
+                  <div class="task-date">Завантажено: 17.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">План роботи</h3>
+                  <span class="task-status status-completed">Прийнято</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">ДЛ</div>
+                    <span>Лебедєв Дмитро</span>
+                  </div>
+                  <div class="task-date">Завантажено: 16.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Аналіз даних</h3>
+                  <span class="task-status status-in-review">На перевірці</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">ОМ</div>
+                    <span>Мороз Олег</span>
+                  </div>
+                  <div class="task-date">Завантажено: 15.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Розробка програмного забезпечення</h3>
+                  <span class="task-status status-needs-revision">Потребує доопрацювання</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">НР</div>
+                    <span>Романенко Наталія</span>
+                  </div>
+                  <div class="task-date">Завантажено: 14.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Експериментальна частина</h3>
+                  <span class="task-status status-completed">Прийнято</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">ТВ</div>
+                    <span>Василенко Тетяна</span>
+                  </div>
+                  <div class="task-date">Завантажено: 13.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Тестування</h3>
+                  <span class="task-status status-in-review">На перевірці</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">ЗМ</div>
+                    <span>Мельник Захар</span>
+                  </div>
+                  <div class="task-date">Завантажено: 12.03.2025</div>
+                </div>
+              </li>
+              <li class="task-item">
+                <div class="task-header">
+                  <h3 class="task-title">Висновки</h3>
+                  <span class="task-status status-completed">Прийнято</span>
+                </div>
+                <div class="task-meta">
+                  <div class="task-student">
+                    <div class="student-avatar">ЧА</div>
+                    <span>Андрієнко Чеслав</span>
+                  </div>
+                  <div class="task-date">Завантажено: 11.03.2025</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+
+          <div>
+            <div class="card" style="margin-bottom: 1.5rem;">
+              <div class="card-header">
+                <h2 class="card-title">Календар дедлайнів</h2>
+              </div>
+              <table class="calendar">
+                  <thead>
+                      <tr>
+                          <th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Нд</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  
+                  </tbody>
+              </table>
+
+              <div class="deadlines-list">
+                <h3 class="deadlines-title">📅 Найближчі дедлайни</h3>
+                <ul class="deadlines-list account-deadlines">
+                  <li class="deadline-item urgent">
+                    <div class="deadline-date">25 бер</div>
+                    <div class="deadline-info">
+                      <div class="deadline-title">Літературний огляд</div>
+                      <div class="deadline-meta">Залишилось: менше 1 дня</div>
+                    </div>
+                  </li>
+                  <li class="deadline-item">
+                    <div class="deadline-date">5 кві</div>
+                    <div class="deadline-info">
+                      <div class="deadline-title">Практична частина</div>
+                      <div class="deadline-meta">Залишилось: 15 днів</div>
+                    </div>
+                  </li>
+                  <li class="deadline-item">
+                    <div class="deadline-date">20 кві</div>
+                    <div class="deadline-info">
+                      <div class="deadline-title">Висновки та додатки</div>
+                      <div class="deadline-meta">Залишилось: 30 днів</div>
+                    </div>
+                  </li>
+                  <li class="deadline-item">
+                    <div class="deadline-date">15 тра</div>
+                    <div class="deadline-info">
+                      <div class="deadline-title">Фінальна версія роботи</div>
+                      <div class="deadline-meta">Залишилось: 55 днів</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Кращі студенти</h2>
+              </div>
+              <ul class="student-list">
+                <li class="student-item">
+                  <div class="student-rank">1</div>
+                  <div class="student-avatar">АМ</div>
+                  <div class="student-info">
+                    <div class="student-name">Андрій Малюта</div>
+                    <div class="student-group">AC-224</div>
+                  </div>
+                  <div class="student-progress">
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 95%;"></div>
+                    </div>
+                    <div class="progress-value">95%</div>
+                  </div>
+                </li>
+                <li class="student-item">
+                  <div class="student-rank">2</div>
+                  <div class="student-avatar">МТ</div>
+                  <div class="student-info">
+                    <div class="student-name">Марія Ткаченко</div>
+                    <div class="student-group">AC-222</div>
+                  </div>
+                  <div class="student-progress">
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 92%;"></div>
+                    </div>
+                    <div class="progress-value">92%</div>
+                  </div>
+                </li>
+                <li class="student-item">
+                  <div class="student-rank">3</div>
+                  <div class="student-avatar">ВП</div>
+                  <div class="student-info">
+                    <div class="student-name">Віктор Павленко</div>
+                    <div class="student-group">AC-223</div>
+                  </div>
+                  <div class="student-progress">
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 88%;"></div>
+                    </div>
+                    <div class="progress-value">88%</div>
+                  </div>
+                </li>
+                <li class="student-item">
+                  <div class="student-rank">4</div>
+                  <div class="student-avatar">НР</div>
+                  <div class="student-info">
+                    <div class="student-name">Наталія Романенко</div>
+                    <div class="student-group">AC-221</div>
+                  </div>
+                  <div class="student-progress">
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 85%;"></div>
+                    </div>
+                    <div class="progress-value">85%</div>
+                  </div>
+                </li>
+                <li class="student-item">
+                  <div class="student-rank">5</div>
+                  <div class="student-avatar">АС</div>
+                  <div class="student-info">
+                    <div class="student-name">Андрій Савченко</div>
+                    <div class="student-group">AC-221</div>
+                  </div>
+                  <div class="student-progress">
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 83%;"></div>
+                    </div>
+                    <div class="progress-value">83%</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+        <span>Підтримка</span>
+        <button class="chat-close" onclick="toggleChat()">×</button>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-placeholder" id="chatPlaceholder">
+            <img src="icons/hello-sticker.png" alt="Привітання" class="chat-sticker">
+            <p>Як ми можемо вам допомогти ?</p>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <textarea id="chatInput" placeholder="Введіть повідомлення..."></textarea>
+        <button id="sendButton" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+</body>
+</html>

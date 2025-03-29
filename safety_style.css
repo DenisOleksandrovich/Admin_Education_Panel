@@ -1,0 +1,397 @@
+@layer reset, base, components, utilities;
+
+@layer reset {
+  .form-container {
+    max-width: 550px;
+    margin: 0 auto;
+    background-image: linear-gradient(120deg, 
+      rgba(var(--color-card), 0.05), 
+      rgba(var(--color-card), 0.02));
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    backdrop-filter: blur(10px);
+    border: var(--card-border);
+    transition: all 0.3s ease;
+  }
+}
+
+@layer base {
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .form-group::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  .form-group:focus-within::after {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@layer components {
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    letter-spacing: 0.02rem;
+    transform: translateY(0);
+    transition: all 0.3s;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-card);
+    color: var(--color-text);
+    transition: all 0.3s;
+    font-size: 1rem;
+    box-shadow: var(--little-blue-shadow);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--blue-shadow);
+    transform: translateY(-2px);
+  }
+
+  .password-container {
+    position: relative;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    transition: all 0.3s;
+  }
+
+  .toggle-password:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .form-hint {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-top: 0.5rem;
+    margin-left: 0.3rem;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+
+  .form-error {
+    font-size: 0.85rem;
+    color: var(--color-danger);
+    margin-top: 0.5rem;
+    margin-left: 0.3rem;
+    display: none;
+    font-weight: 500;
+    animation: shake 0.5s ease;
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5rem;
+    gap: 1rem;
+  }
+
+  .btn {
+    padding: 0.85rem 1.8rem;
+    border-radius: 0.75rem;
+    border: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: var(--main-bg-color);
+    transition: all 0.5s;
+  }
+
+  .btn:hover::after {
+    left: 100%;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    flex: 1;
+    color: white;
+    box-shadow: var(--little-blue-shadow);
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--blue-shadow);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-hover);
+    box-shadow: var(--red-shadow);
+  }
+
+  .password-strength {
+    height: 6px;
+    width: 100%;
+    background-color: var(--color-border);
+    margin-top: 0.8rem;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .password-strength-meter {
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s, background-color 0.5s;
+    border-radius: 10px;
+  }
+
+  .strength-weak {
+    width: 33%;
+    background-color: var(--color-danger);
+    animation: pulse 1.5s infinite;
+  }
+
+  .strength-medium {
+    width: 66%;
+    background-color: var(--color-warning);
+  }
+
+  .strength-strong {
+    width: 100%;
+    background-color: var(--color-success);
+  }
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .form-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-primary-light));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.2rem;
+    font-size: 1.5rem;
+    box-shadow: var(--little-blue-shadow);
+  }
+
+  .form-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--color-primary), var(--color-primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+  }
+
+  .strength-label {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+
+  .password-requirements {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--color-hover);
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+  }
+
+  .requirement {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+    transition: color 0.3s ease;
+  }
+
+  .requirement i {
+    margin-right: 0.5rem;
+    color: var(--color-text-light);
+    transition: color 0.3s ease;
+  }
+
+  .requirement.met i {
+    color: var(--color-success);
+  }
+
+  .form-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+  }
+
+  .form-section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background-color: var(--color-primary);
+    margin-right: 0.75rem;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes success-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+  }
+}
+
+@layer theme {
+  [data-theme='dark'] .form-container {
+    background-image: linear-gradient(120deg, 
+      rgba(31, 41, 55, 0.3), 
+      rgba(31, 41, 55, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme='dark'] .form-input {
+    background-color: rgba(31, 41, 55, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme='dark'] .password-requirements {
+    background-color: rgba(31, 41, 55, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme='dark'] .btn-secondary {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  [data-theme='dark'] .btn::after {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+}
+
+@layer responsive {
+  @media (max-width: 768px) {
+    .form-container {
+      padding: 1.5rem;
+      max-width: 100%;
+    }
+    
+    .form-buttons {
+      flex-direction: column-reverse;
+      gap: 0.75rem;
+    }
+    
+    .btn {
+      width: 100%;
+    }
+    
+    .form-header {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: center;
+    }
+    
+    .form-icon {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@layer variants {
+  .form-input:focus ~ .form-label,
+  .form-input:valid ~ .form-label {
+    color: var(--color-primary);
+  }
+
+  .form-input.error {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  }
+
+  .form-input.valid {
+    border-color: var(--color-success);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+  }
+
+  .btn-primary.success {
+    background-color: var(--color-success);
+    animation: success-pulse 1.5s infinite;
+  }
+}

@@ -1,0 +1,496 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Викладачі | Система дипломних робіт</title>
+
+  <link rel="stylesheet" href="index_style.css">
+  <link rel="stylesheet" href="teachers_style.css">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+</head>
+
+<script type="module" src="index_animation.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      <div class="user-profile" onclick="window.location.href='account.html'">
+        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
+        <div class="user-details">
+            <span class="user-name">Дерус Денис Олександрович</span>
+            <span class="user-group">Група АС-224</span>
+            <span class="user-list-number">Номер в списку: 5</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Головне</div>
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon">📊</span>
+            <span>Огляд</span>
+          </a>
+          <a href="students.html" class="nav-link">
+            <span class="nav-icon">👥</span>
+            <span>Студенти</span>
+          </a>
+          <a href="teachers.html" class="nav-link">
+            <span class="nav-icon">👨‍🏫</span>
+            <span>Викладачі</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Управління</div>
+          <a href="tasks.html" class="nav-link">
+            <span class="nav-icon">✅</span>
+            <span>Завдання</span>
+          </a>
+          <a href="calendar.html" class="nav-link">
+            <span class="nav-icon">📆</span>
+            <span>Календар</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Налаштування</div>
+          <a href="account.html" class="nav-link">
+            <span class="nav-icon">👤</span>
+            <span>Профіль</span>
+          </a>
+          <a href="notification.html" class="nav-link">
+            <span class="nav-icon">🔔</span>
+            <span>Сповіщення</span>
+          </a>
+          <a href="safety_page.html" class="nav-link">
+            <span class="nav-icon">🔒</span>
+            <span>Безпека</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-support" onclick="toggleChat()">
+          <div class="support-icon">💬</div>
+          <div class="support-info">
+            <div class="support-title">Підтримка</div>
+            <div class="support-text">Чат і соц. мережі</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid" style="--font-level: 2;">Список викладачів</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="search-container">
+          <input type="text" placeholder="Пошук викладачів за ім'ям, кафедрою або спеціалізацією..." class="search-input">
+          <button class="filter-button">
+            <i class="fa fa-sliders"></i> Фільтри
+          </button>
+        </div>
+        
+        <div class="filter-container">
+          <div class="filter-button active">
+            <i class="fa fa-users"></i> Всі викладачі
+          </div>
+          <div class="filter-button">
+            <i class="fa fa-building"></i> Кафедра IT
+          </div>
+          <div class="filter-button">
+            <i class="fa fa-star"></i> Наукові керівники
+          </div>
+          <div class="filter-button">
+            <i class="fa fa-graduation-cap"></i> Професори
+          </div>
+          <div class="filter-button">
+            <i class="fa fa-users"></i> Доступні для керівництва
+          </div>
+        </div>
+
+        <div class="teachers-grid">
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">ОК</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Ковальчук Олександр Вікторович</h3>
+                <span class="status-badge status-active">Доступний</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Професор</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">ІТ</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">8</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">РІС</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">МП</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Петренко Марія Іванівна</h3>
+                <span class="status-badge status-active">Доступний</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Доцент</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">Програмна інж.</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">6</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">Моб. розробка</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">ВІ</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Іванов Віктор Степанович</h3>
+                <span class="status-badge status-warning">Обмежений</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Професор</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">Комп'ютерні науки</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">10</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">Веб-сервіси</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">КС</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Сидоренко Катерина Миколаївна</h3>
+                <span class="status-badge status-active">Доступний</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Доцент</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">ШІ</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">5</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">Машинне навч.</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">ДМ</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Марченко Дмитро Валерійович</h3>
+                <span class="status-badge status-warning">Обмежений</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Доцент</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">Інф. системи</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">9</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">БД, Сист. арх.</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">ТР</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Романова Тетяна Олексіївна</h3>
+                <span class="status-badge status-inactive">Не доступний</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Професор</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">Кібербезпека</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">12</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">Захист даних</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">АГ</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Григоренко Андрій Павлович</h3>
+                <span class="status-badge status-active">Доступний</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Старший викладач</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">Програмування</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">4</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">Ігри, AR/VR</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large">ОБ</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large">Бондаренко Олена Геннадіївна</h3>
+                <span class="status-badge status-active">Доступний</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label">Посада</span>
+                <span class="meta-value">Доцент</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Кафедра</span>
+                <span class="meta-value">Автоматизація систем</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Студентів</span>
+                <span class="meta-value">7</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Спеціалізація</span>
+                <span class="meta-value">IoT</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <div class="page-button disabled">
+            <i class="fa fa-chevron-left"></i>
+          </div>
+          <div class="page-button active">1</div>
+          <div class="page-button">2</div>
+          <div class="page-button">3</div>
+          <div class="page-button">
+            <i class="fa fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+        <span>Підтримка</span>
+        <button class="chat-close" onclick="toggleChat()">×</button>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-placeholder" id="chatPlaceholder">
+            <img src="icons/hello-sticker.png" alt="Привітання" class="chat-sticker">
+            <p>Як ми можемо вам допомогти ?</p>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <textarea id="chatInput" placeholder="Введіть повідомлення..."></textarea>
+        <button id="sendButton" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.filter-button').forEach(button => {
+      button.addEventListener('click', function() {
+        if (!this.classList.contains('active')) {
+          document.querySelectorAll('.filter-button').forEach(btn => {
+            btn.classList.remove('active');
+          });
+          this.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

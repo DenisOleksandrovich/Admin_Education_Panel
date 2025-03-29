@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Календар Подій</title>
+  <link rel="stylesheet" href="index_style.css">
+  <link rel="stylesheet" href="calendar_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="index_animation.js"></script>
+<script type="module" src="calendar_animation.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      <div class="user-profile" onclick="window.location.href='account.html'">
+        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
+        <div class="user-details">
+            <span class="user-name">Дерус Денис Олександрович</span>
+            <span class="user-group">Група АС-224</span>
+            <span class="user-list-number">Номер в списку: 5</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Головне</div>
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon">📊</span>
+            <span>Огляд</span>
+          </a>
+          <a href="students.html" class="nav-link">
+            <span class="nav-icon">👥</span>
+            <span>Студенти</span>
+          </a>
+          <a href="teachers.html" class="nav-link">
+            <span class="nav-icon">👨‍🏫</span>
+            <span>Викладачі</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Управління</div>
+          <a href="tasks.html" class="nav-link">
+            <span class="nav-icon">✅</span>
+            <span>Завдання</span>
+          </a>
+          <a href="calendar.html" class="nav-link">
+            <span class="nav-icon">📆</span>
+            <span>Календар</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Налаштування</div>
+          <a href="account.html" class="nav-link">
+            <span class="nav-icon">👤</span>
+            <span>Профіль</span>
+          </a>
+          <a href="notification.html" class="nav-link">
+            <span class="nav-icon">🔔</span>
+            <span>Сповіщення</span>
+          </a>
+          <a href="safety_page.html" class="nav-link">
+            <span class="nav-icon">🔒</span>
+            <span>Безпека</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-support" onclick="toggleChat()">
+          <div class="support-icon">💬</div>
+          <div class="support-info">
+            <div class="support-title">Підтримка</div>
+            <div class="support-text">Чат і соц. мережі</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid" style="--font-level: 2;">Календар Подій</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+          </button>
+        </div>
+      </header>
+    
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <div class="calendar-title">Березень 2025</div>
+          <div class="calendar-actions">
+            <div class="calendar-navigation">
+              <button class="nav-button">◀</button>
+              <button class="nav-button">Сьогодні</button>
+              <button class="nav-button">▶</button>
+            </div>
+            <div class="view-selector">
+              <button class="view-button">День</button>
+              <button class="view-button">Тиждень</button>
+              <button class="view-button active">Місяць</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="event-legend">
+          <div class="legend-item">
+            <div class="legend-color legend-deadline"></div>
+            <span>Дедлайн</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color legend-assignment"></div>
+            <span>Нове завдання</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color legend-submission"></div>
+            <span>Здача завдання</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color legend-personal"></div>
+            <span>Особистий план</span>
+          </div>
+        </div>
+        
+        <div class="calendar-grid">
+          <div class="calendar-day-header">Пн</div>
+          <div class="calendar-day-header">Вт</div>
+          <div class="calendar-day-header">Ср</div>
+          <div class="calendar-day-header">Чт</div>
+          <div class="calendar-day-header">Пт</div>
+          <div class="calendar-day-header">Сб</div>
+          <div class="calendar-day-header">Нд</div>
+          
+        </div>
+        
+        <div class="upcoming-events">
+          <div class="upcoming-title">Найближчі події</div>
+          <ul class="upcoming-list">
+            <li class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="upcoming-day">21</div>
+                <div class="upcoming-month">Бер</div>
+              </div>
+              <div class="upcoming-content">
+                <div class="upcoming-title-text">Здача: Лабораторна робота №7</div>
+                <div class="upcoming-info">
+                  <span>Група ІТ-201</span>
+                  <span>•</span>
+                  <span>14:30</span>
+                </div>
+              </div>
+              <div class="upcoming-type type-submission">Здача</div>
+            </li>
+            <li class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="upcoming-day">21</div>
+                <div class="upcoming-month">Бер</div>
+              </div>
+              <div class="upcoming-content">
+                <div class="upcoming-title-text">Кафедральні збори</div>
+                <div class="upcoming-info">
+                  <span>Аудиторія 405</span>
+                  <span>•</span>
+                  <span>16:00</span>
+                </div>
+              </div>
+              <div class="upcoming-type type-personal">Особисте</div>
+            </li>
+            <li class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="upcoming-day">22</div>
+                <div class="upcoming-month">Бер</div>
+              </div>
+              <div class="upcoming-content">
+                <div class="upcoming-title-text">Дедлайн: Курсовий проект</div>
+                <div class="upcoming-info">
+                  <span>Групи ІТ-201, ІТ-202</span>
+                  <span>•</span>
+                  <span>23:59</span>
+                </div>
+              </div>
+              <div class="upcoming-type type-deadline">Дедлайн</div>
+            </li>
+            <li class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="upcoming-day">24</div>
+                <div class="upcoming-month">Бер</div>
+              </div>
+              <div class="upcoming-content">
+                <div class="upcoming-title-text">Здача: Фінальний тест</div>
+                <div class="upcoming-info">
+                  <span>Всі групи</span>
+                  <span>•</span>
+                  <span>10:00</span>
+                </div>
+              </div>
+              <div class="upcoming-type type-submission">Здача</div>
+            </li>
+            <li class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="upcoming-day">25</div>
+                <div class="upcoming-month">Бер</div>
+              </div>
+              <div class="upcoming-content">
+                <div class="upcoming-title-text">Дедлайн: Всі роботи</div>
+                <div class="upcoming-info">
+                  <span>Кінцевий термін</span>
+                  <span>•</span>
+                  <span>23:59</span>
+                </div>
+              </div>
+              <div class="upcoming-type type-deadline">Дедлайн</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+        <span>Підтримка</span>
+        <button class="chat-close" onclick="toggleChat()">×</button>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-placeholder" id="chatPlaceholder">
+            <img src="icons/hello-sticker.png" alt="Привітання" class="chat-sticker">
+            <p>Як ми можемо вам допомогти ?</p>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <textarea id="chatInput" placeholder="Введіть повідомлення..."></textarea>
+        <button id="sendButton" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</body>
+</html>

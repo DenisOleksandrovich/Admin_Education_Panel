@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Зміна пароля | Система дипломних робіт</title>
+
+  <link rel="stylesheet" href="index_style.css">
+  <link rel="stylesheet" href="safety_style.css">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="safety_style.css">
+</head>
+
+<script type="module" src="index_animation.js"></script>
+<script type="module" src="safety.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      <div class="user-profile" onclick="window.location.href='account.html'">
+        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
+        <div class="user-details">
+            <span class="user-name">Дерус Денис Олександрович</span>
+            <span class="user-group">Група АС-224</span>
+            <span class="user-list-number">Номер в списку: 5</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Головне</div>
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon">📊</span>
+            <span>Огляд</span>
+          </a>
+          <a href="students.html" class="nav-link">
+            <span class="nav-icon">👥</span>
+            <span>Студенти</span>
+          </a>
+          <a href="teachers.html" class="nav-link">
+            <span class="nav-icon">👨‍🏫</span>
+            <span>Викладачі</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Управління</div>
+          <a href="tasks.html" class="nav-link">
+            <span class="nav-icon">✅</span>
+            <span>Завдання</span>
+          </a>
+          <a href="calendar.html" class="nav-link">
+            <span class="nav-icon">📆</span>
+            <span>Календар</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Налаштування</div>
+          <a href="account.html" class="nav-link">
+            <span class="nav-icon">👤</span>
+            <span>Профіль</span>
+          </a>
+          <a href="notification.html" class="nav-link">
+            <span class="nav-icon">🔔</span>
+            <span>Сповіщення</span>
+          </a>
+          <a href="safety_page.html" class="nav-link">
+            <span class="nav-icon">🔒</span>
+            <span>Безпека</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-support" onclick="toggleChat()">
+          <div class="support-icon">💬</div>
+          <div class="support-info">
+            <div class="support-title">Підтримка</div>
+            <div class="support-text">Чат і соц. мережі</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid" style="--font-level: 2;">Сторінка безпеки</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="card">
+          <div class="form-container">
+            <div class="form-header">
+              <div class="form-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <h2 class="form-title">Зміна пароля</h2>
+            </div>
+            
+            <form id="passwordChangeForm">
+              <!-- Account Verification Section -->
+              <div class="form-section-title">
+                <span>Підтвердження облікового запису</span>
+              </div>
+              
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="example@domain.com" required>
+                <div class="form-error" id="emailError"><i class="fas fa-exclamation-circle"></i> Невірний email</div>
+              </div>
+              
+              <div class="form-section-title" style="margin-top: 2rem;">
+                <span>Створення нового пароля</span>
+              </div>
+              
+              <div class="form-group">
+                <label for="newPassword" class="form-label">Новий пароль</label>
+                <div class="password-container">
+                  <input type="password" id="newPassword" class="form-input" placeholder="Введіть новий пароль" required 
+                         onkeyup="checkPasswordStrength()">
+                  <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPassword')">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <div class="password-strength">
+                  <div class="password-strength-meter" id="passwordStrengthMeter"></div>
+                </div>
+                <div class="strength-label">
+                  <span>Слабкий</span>
+                  <span>Середній</span>
+                  <span>Надійний</span>
+                </div>
+                
+                <div class="password-requirements">
+                  <div class="requirement" id="req-length"><i class="fas fa-circle"></i> Мінімум 8 символів</div>
+                  <div class="requirement" id="req-case"><i class="fas fa-circle"></i> Великі та малі літери</div>
+                  <div class="requirement" id="req-numbers"><i class="fas fa-circle"></i> Цифри</div>
+                  <div class="requirement" id="req-special"><i class="fas fa-circle"></i> Спеціальні символи</div>
+                </div>
+                
+                <div class="form-error" id="newPasswordError"><i class="fas fa-exclamation-circle"></i> Пароль занадто слабкий</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="confirmPassword" class="form-label">Підтвердіть новий пароль</label>
+                <div class="password-container">
+                  <input type="password" id="confirmPassword" class="form-input" placeholder="Введіть пароль ще раз" required onkeyup="checkPasswordMatch()">
+                  <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirmPassword')">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <div class="form-error" id="confirmPasswordError"><i class="fas fa-exclamation-circle"></i> Паролі не співпадають</div>
+              </div>
+              
+              <div class="form-buttons">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='account.html'">Скасувати</button>
+                <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання | Система дипломних робіт</title>
+
+  <link rel="stylesheet" href="index_style.css">
+  <link rel="stylesheet" href="task_style.css">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="index_animation.js"></script>
+<script type="module" src="tasks_animation.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      <div class="user-profile" onclick="window.location.href='account.html'">
+        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
+        <div class="user-details">
+            <span class="user-name">Дерус Денис Олександрович</span>
+            <span class="user-group">Група АС-224</span>
+            <span class="user-list-number">Номер в списку: 5</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Головне</div>
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon">📊</span>
+            <span>Огляд</span>
+          </a>
+          <a href="students.html" class="nav-link">
+            <span class="nav-icon">👥</span>
+            <span>Студенти</span>
+          </a>
+          <a href="teachers.html" class="nav-link">
+            <span class="nav-icon">👨‍🏫</span>
+            <span>Викладачі</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Управління</div>
+          <a href="tasks.html" class="nav-link">
+            <span class="nav-icon">✅</span>
+            <span>Завдання</span>
+          </a>
+          <a href="calendar.html" class="nav-link">
+            <span class="nav-icon">📆</span>
+            <span>Календар</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Налаштування</div>
+          <a href="account.html" class="nav-link">
+            <span class="nav-icon">👤</span>
+            <span>Профіль</span>
+          </a>
+          <a href="notification.html" class="nav-link">
+            <span class="nav-icon">🔔</span>
+            <span>Сповіщення</span>
+          </a>
+          <a href="safety_page.html" class="nav-link">
+            <span class="nav-icon">🔒</span>
+            <span>Безпека</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-support" onclick="toggleChat()">
+          <div class="support-icon">💬</div>
+          <div class="support-info">
+            <div class="support-title">Підтримка</div>
+            <div class="support-text">Чат і соц. мережі</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid" style="--font-level: 2;">Завдання</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="search-container">
+          <div class="search-input-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="taskSearch" placeholder="Пошук завдань за назвою, описом або типом...">
+            <button class="clear-search" id="clearSearch">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <button class="btn btn-primary" id="addTaskBtn">
+            <i class="fas fa-plus"></i> Нове завдання
+          </button>
+        </div>
+
+        <div class="filter-container">
+          <button class="filter-button active" data-filter="all">
+            <i class="fas fa-th-list"></i> Всі завдання
+          </button>
+          <button class="filter-button" data-filter="pending">
+            <i class="fas fa-clock"></i> Очікують виконання
+          </button>
+          <button class="filter-button" data-filter="review">
+            <i class="fas fa-search"></i> На перевірці
+          </button>
+          <button class="filter-button" data-filter="completed">
+            <i class="fas fa-check-circle"></i> Виконані
+          </button>
+          <button class="filter-button" data-filter="overdue">
+            <i class="fas fa-exclamation-triangle"></i> Протерміновані
+          </button>
+        </div>
+        
+        <div class="advanced-filters">
+          <select class="filter-select" id="groupFilter">
+            <option value="">Всі групи</option>
+            <option value="AC-221">AC-221</option>
+            <option value="AC-222">AC-222</option>
+            <option value="AC-223">AC-223</option>
+            <option value="AC-224">AC-224</option>
+          </select>
+          
+          <select class="filter-select" id="typeFilter">
+            <option value="">Всі типи</option>
+            <option value="theory">Теоретичні</option>
+            <option value="practice">Практичні</option>
+            <option value="report">Звіти</option>
+          </select>
+          
+          <select class="filter-select" id="sortFilter">
+            <option value="deadline-asc">Дедлайн (найближчі)</option>
+            <option value="deadline-desc">Дедлайн (віддалені)</option>
+            <option value="name-asc">Назва (А-Я)</option>
+            <option value="name-desc">Назва (Я-А)</option>
+            <option value="date-asc">Дата створення (нові)</option>
+            <option value="date-desc">Дата створення (старі)</option>
+          </select>
+        </div>
+
+        <div class="task-management">
+          <div class="task-management-content">
+            <!-- Awaiting Execution Section -->
+            <div class="task-section" id="pendingTasks">
+              <div class="section-header">
+                <h2><i class="fas fa-clock"></i> Очікують виконання</h2>
+                <span class="task-count">2</span>
+              </div>
+              
+              <div class="task-grid">
+                <div class="task-card" data-task-id="1" data-status="pending">
+                  <div class="task-card-header">
+                    <h3 class="task-card-title">Літературний огляд</h3>
+                    <span class="task-card-deadline">Дедлайн: 30.03.2025</span>
+                  </div>
+                  <p class="task-card-description">Підготувати огляд літератури по темі дослідження обсягом 10-15 сторінок.</p>
+                  <div class="task-card-documents">
+                    <div class="task-document">
+                      <i class="fas fa-file-pdf"></i>
+                      <span>Вимоги_до_огляду.pdf</span>
+                    </div>
+                    <div class="task-document">
+                      <i class="fas fa-file-word"></i>
+                      <span>Зразок_оформлення.docx</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text">Не розпочато</span>
+                  </div>
+                  <div class="task-card-footer">
+                    <span class="task-card-status status-pending">Очікує виконання</span>
+                    <div class="task-card-actions">
+                      <button class="task-action-button view-task" title="Переглянути деталі">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="task-action-button submit-task" title="Здати роботу">
+                        <i class="fas fa-upload"></i>
+                      </button>
+                      <button class="task-action-button edit-task" title="Редагувати" data-role="advisor">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="task-card" data-task-id="2" data-status="pending">
+                  <div class="task-card-header">
+                    <h3 class="task-card-title">Методологія дослідження</h3>
+                    <span class="task-card-deadline urgent">Дедлайн: 22.03.2025</span>
+                  </div>
+                  <p class="task-card-description">Розробити методологію дослідження з описом методів та підходів.</p>
+                  <div class="task-card-documents">
+                    <div class="task-document">
+                      <i class="fas fa-file-pdf"></i>
+                      <span>Методи_дослідження.pdf</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text">Не розпочато</span>
+                  </div>
+                  <div class="task-card-footer">
+                    <span class="task-card-status status-pending">Очікує виконання</span>
+                    <div class="task-card-actions">
+                      <button class="task-action-button view-task" title="Переглянути деталі">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="task-action-button submit-task" title="Здати роботу">
+                        <i class="fas fa-upload"></i>
+                      </button>
+                      <button class="task-action-button edit-task" title="Редагувати" data-role="advisor">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-section" id="reviewTasks">
+              <div class="section-header">
+                <h2><i class="fas fa-search"></i> На перевірці</h2>
+                <span class="task-count">1</span>
+              </div>
+              
+              <div class="task-grid">
+                <div class="task-card" data-task-id="5" data-status="review">
+                  <div class="task-card-header">
+                    <h3 class="task-card-title">Аналіз даних</h3>
+                    <span class="task-card-deadline">Дедлайн: 25.03.2025</span>
+                  </div>
+                  <p class="task-card-description">Провести аналіз зібраних даних та підготувати візуалізації результатів.</p>
+                  <div class="task-card-documents">
+                    <div class="task-document">
+                      <i class="fas fa-file-excel"></i>
+                      <span>data_example.xlsx</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 75%"></div>
+                    </div>
+                    <span class="progress-text">На перевірці</span>
+                  </div>
+                  <div class="task-card-footer">
+                    <span class="task-card-status status-in-review">На перевірці</span>
+                    <div class="task-card-actions">
+                      <button class="task-action-button view-task" title="Переглянути деталі">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="task-action-button edit-submission" title="Редагувати відповідь">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="task-action-button review-task" title="Перевірити" data-role="advisor">
+                        <i class="fas fa-check"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-section" id="completedTasks">
+              <div class="section-header">
+                <h2><i class="fas fa-check-circle"></i> Виконані</h2>
+                <span class="task-count">1</span>
+              </div>
+              
+              <div class="task-grid">
+                <div class="task-card" data-task-id="3" data-status="completed">
+                  <div class="task-card-header">
+                    <h3 class="task-card-title">Практична частина</h3>
+                    <span class="task-card-deadline">Дедлайн: 10.04.2025</span>
+                  </div>
+                  <p class="task-card-description">Реалізувати практичну складову роботи та надати результати.</p>
+                  <div class="task-card-documents">
+                    <div class="task-document">
+                      <i class="fas fa-file-powerpoint"></i>
+                      <span>Презентація_прикладу.pptx</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 100%"></div>
+                    </div>
+                    <span class="progress-text">Виконано</span>
+                  </div>
+                  <div class="task-card-footer">
+                    <span class="task-card-status status-completed">Прийнято</span>
+                    <div class="task-card-actions">
+                      <button class="task-action-button view-task" title="Переглянути деталі">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="task-action-button submit-task" title="Здати роботу">
+                        <i class="fas fa-upload"></i>
+                      </button>
+                      <button class="task-action-button edit-task" title="Редагувати" data-role="advisor">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-section" id="overdueTasks">
+              <div class="section-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Протерміновані</h2>
+                <span class="task-count">1</span>
+              </div>
+              
+              <div class="task-grid">
+                <div class="task-card" data-task-id="4" data-status="overdue">
+                  <div class="task-card-header">
+                    <h3 class="task-card-title">Вступ</h3>
+                    <span class="task-card-deadline overdue">Дедлайн: 05.03.2025</span>
+                  </div>
+                  <p class="task-card-description">Розробити вступ до дипломної роботи з обґрунтуванням актуальності проблеми.</p>
+                  <div class="task-card-documents">
+                    <div class="task-document">
+                      <i class="fas fa-file-pdf"></i>
+                      <span>Приклад_вступу.pdf</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-bar overdue">
+                      <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text">Протерміновано</span>
+                  </div>
+                  <div class="task-card-footer">
+                    <span class="task-card-status status-overdue">Пропущений термін</span>
+                    <div class="task-card-actions">
+                      <button class="task-action-button view-task" title="Переглянути деталі">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="task-action-button submit-task" title="Здати роботу">
+                        <i class="fas fa-upload"></i>
+                      </button>
+                      <button class="task-action-button edit-task" title="Редагувати" data-role="advisor">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="new-task-overlay" id="newTaskFormOverlay" style="display: none;">
+      <div class="new-task-form">
+        <div class="new-task-header">
+          <h3 class="new-task-title" id="newTaskTitle">Нове завдання</h3>
+          <button class="new-task-close" id="closeNewTaskForm">&times;</button>
+        </div>
+    
+        <form id="newTaskForm">
+          <input type="hidden" id="taskId" value="">
+    
+          <div class="new-task-group">
+            <label for="taskTitle" class="new-task-label">Назва завдання</label>
+            <input type="text" id="taskTitle" class="new-task-input" required>
+          </div>
+    
+          <div class="new-task-group">
+            <label for="taskDescription" class="new-task-label">Опис завдання</label>
+            <textarea id="taskDescription" class="new-task-input new-task-textarea" required></textarea>
+          </div>
+    
+          <div class="new-task-group">
+            <label for="taskDeadline" class="new-task-label">Дедлайн</label>
+            <input type="date" id="taskDeadline" class="new-task-input" required>
+          </div>
+    
+          <div class="new-task-group">
+            <label for="taskGroups" class="new-task-label">Призначити групам</label>
+            <select id="taskGroups" class="new-task-input" multiple>
+              <option value="AC-221">AC-221</option>
+              <option value="AC-222">AC-222</option>
+              <option value="AC-223">AC-223</option>
+              <option value="AC-224">AC-224</option>
+            </select>
+          </div>
+    
+          <div class="new-task-group">
+            <label for="taskType" class="new-task-label">Тип завдання</label>
+            <select id="taskType" class="new-task-input">
+              <option value="theory">Теоретичне</option>
+              <option value="practice">Практичне</option>
+              <option value="report">Звітне</option>
+            </select>
+          </div>
+    
+          <div class="new-task-group">
+            <label class="new-task-label">Документи до завдання</label>
+            <div class="new-task-documents-container">
+              <div class="new-task-documents-list" id="newTaskDocumentsList"></div>
+              <div class="new-task-documents-upload">
+                <label for="newTaskDocuments" class="btn btn-secondary btn-sm">
+                  <i class="fas fa-plus"></i>
+                </label>
+                <input type="file" id="newTaskDocuments" class="hidden-input" multiple>
+              </div>
+            </div>
+          </div>
+    
+          <div class="new-task-group">
+            <label class="new-task-label">Параметри здачі роботи</label>
+            <div class="new-task-submission-options">
+              <div class="new-task-checkbox-group">
+                <input type="checkbox" id="allowTextSubmission" checked>
+                <label for="allowTextSubmission">Дозволити здачу текстом</label>
+              </div>
+              <div class="new-task-checkbox-group">
+                <input type="checkbox" id="allowFileSubmission" checked>
+                <label for="allowFileSubmission">Дозволити здачу файлами</label>
+              </div>
+              <div class="new-task-file-types" id="newAllowedFileTypesContainer">
+                <label>Дозволені типи файлів:</label>
+                <div class="new-task-file-type-options">
+                  <div class="new-task-checkbox-group">
+                    <input type="checkbox" id="allowPdf" checked>
+                    <label for="allowPdf">PDF</label>
+                  </div>
+                  <div class="new-task-checkbox-group">
+                    <input type="checkbox" id="allowDoc" checked>
+                    <label for="allowDoc">DOC/DOCX</label>
+                  </div>
+                  <div class="new-task-checkbox-group">
+                    <input type="checkbox" id="allowZip">
+                    <label for="allowZip">ZIP</label>
+                  </div>
+                  <div class="new-task-checkbox-group">
+                    <input type="checkbox" id="allowCode">
+                    <label for="allowCode">Код (.py, .js, .cpp)</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="new-task-actions">
+            <button type="button" class="btn btn-secondary" id="cancelNewTaskForm">Скасувати</button>
+            <button type="submit" class="btn btn-primary">Зберегти</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="task-form-overlay" id="submissionOverlay" style="display: none;">
+      <div class="task-form submission-modal">
+        <div class="task-form-header">
+          <h3 class="task-form-title">Здати завдання: <span id="submissionTaskTitle">Літературний огляд</span></h3>
+          <button class="form-close" id="closeSubmissionForm">&times;</button>
+        </div>
+        
+        <form id="submissionForm">
+          <input type="hidden" id="submissionTaskId" value="">
+          
+          <div class="submission-form-group">
+            <label class="form-label">Спосіб здачі</label>
+            <div class="submission-tabs">
+              <button type="button" class="submission-tab active" data-tab="text">Текст</button>
+              <button type="button" class="submission-tab" data-tab="file">Файли</button>
+            </div>
+            
+            <div class="submission-content" id="textSubmission">
+              <div class="form-group">
+                <label for="submissionText" class="form-label">Ваша робота</label>
+                <textarea id="submissionText" class="form-control form-textarea" style="min-height: 200px;"></textarea>
+              </div>
+            </div>
+            
+            <div class="submission-content" id="fileSubmission" style="display: none;">
+              <div class="file-drop-area" id="dropArea">
+                <div class="file-drop-icon">
+                  <i class="fas fa-file-upload"></i>
+                </div>
+                <p>Перетягніть файли сюди або натисніть для вибору</p>
+                <div class="allowed-types-notice">Дозволені формати: PDF, DOC, DOCX</div>
+                <input type="file" id="submissionFile" accept=".pdf,.doc,.docx" style="display: none;" multiple>
+              </div>
+              
+              <div class="files-preview" id="filesPreview">
+                
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="submissionComment" class="form-label">Коментар до роботи (опціонально)</label>
+            <textarea id="submissionComment" class="form-control"></textarea>
+          </div>
+          
+          <div class="security-notice">
+            <p><i class="fas fa-shield-alt"></i> Усі завантажені файли перевіряються на наявність шкідливого коду для забезпечення безпеки.</p>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelSubmission">Скасувати</button>
+            <button type="submit" class="btn btn-primary">Здати роботу</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="task-form-overlay" id="taskDetailOverlay" style="display: none;">
+      <div class="task-form task-detail-modal">
+        <div class="task-form-header">
+          <h3 class="task-form-title">Деталі завдання</h3>
+          <button class="form-close" id="closeTaskDetail">&times;</button>
+        </div>
+        
+        <div class="task-detail-header">
+          <h2 class="task-detail-title" id="detailTaskTitle">Літературний огляд</h2>
+          <div class="task-detail-meta">
+            <span><i class="fas fa-calendar"></i> Дедлайн: <span id="detailTaskDeadline">30.03.2025</span></span>
+            <span><i class="fas fa-clock"></i> Статус: <span id="detailTaskStatus">Очікує виконання</span></span>
+            <span><i class="fas fa-users"></i> Групи: <span id="detailTaskGroups">AC-224</span></span>
+            <span><i class="fas fa-tag"></i> Тип: <span id="detailTaskType">Теоретичний</span></span>
+          </div>
+        </div>
+        
+        <div class="task-detail-content">
+          <div class="task-detail-description" id="detailTaskDescription">
+            <p>Підготувати огляд літератури по темі дослідження обсягом 10-15 сторінок.</p>
+            <p>У роботі має бути проаналізовано не менше 15 джерел, включаючи наукові статті та монографії. Огляд повинен містити аналіз сучасного стану проблеми, виявлення протиріч та невирішених питань.</p>
+          </div>
+
+          <div class="task-documents-section">
+            <h4>Матеріали для виконання</h4>
+            <div class="task-documents-list">
+              <div class="task-document-item">
+                <div class="task-document-icon"><i class="fas fa-file-pdf"></i></div>
+                <div class="task-document-info">
+                  <div class="task-document-name">Вимоги_до_огляду.pdf</div>
+                  <div class="task-document-size">1.2 MB</div>
+                </div>
+                <button class="task-document-download">
+                  <i class="fas fa-download"></i>
+                </button>
+              </div>
+              <div class="task-document-item">
+                <div class="task-document-icon"><i class="fas fa-file-word"></i></div>
+                <div class="task-document-info">
+                  <div class="task-document-name">Зразок_оформлення.docx</div>
+                  <div class="task-document-size">890 KB</div>
+                </div>
+                <button class="task-document-download">
+                  <i class="fas fa-download"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions" id="studentActions">
+            <button type="button" class="btn btn-primary" id="submitTaskBtn"><i class="fas fa-upload"></i></button>
+          </div>
+          
+          <div class="form-actions" id="advisorActions" style="display: none;">
+            <button type="button" class="btn btn-secondary" id="editDetailedTaskBtn">Редагувати завдання</button>
+          </div>
+        </div>
+        
+        <div class="submission-history">
+          <h3 class="submission-history-title">Історія виконання</h3>
+          
+          <div class="submission-item">
+            <div class="submission-header">
+              <span><i class="fas fa-user"></i> Дерус Денис Олександрович</span>
+              <span class="submission-date">20.03.2025, 15:42</span>
+            </div>
+            <span class="submission-status status-in-review">На перевірці</span>
+            
+            <div class="submission-content">
+              <div class="submission-files">
+                <div class="submission-file">
+                  <span class="submission-file-icon"><i class="fas fa-file-pdf"></i></span>
+                  <span class="submission-file-name">literaturniy_oglyad.pdf</span>
+                  <span class="submission-file-status">
+                    <i class="fas fa-shield-alt"></i> Файл перевірено
+                  </span>
+                </div>
+              </div>
+              <div class="submission-comment">
+                <p>Надсилаю першу версію літературного огляду. Буду вдячний за коментарі та зауваження.</p>
+              </div>
+              <div class="submission-actions">
+                <button class="btn btn-secondary">Завантажити</button>
+                <button class="btn btn-primary" data-role="advisor">Перевірити</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="comment-section">
+          <h3 class="submission-history-title">Коментарі</h3>
+          
+          <form class="comment-form">
+            <input type="text" class="comment-input form-control" placeholder="Додати коментар...">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+          
+          <ul class="comment-list">
+            <li class="comment-item">
+              <div class="comment-header">
+                <span class="comment-author">Професор Ковальчук Олександр</span>
+                <span class="comment-date">19.03.2025, 10:15</span>
+              </div>
+              <p>Прошу звернути увагу на оформлення цитат та посилань згідно з актуальним стандартом.</p>
+            </li>
+            <li class="comment-item">
+              <div class="comment-header">
+                <span class="comment-author">Дерус Денис Олександрович</span>
+                <span class="comment-date">19.03.2025, 12:30</span>
+              </div>
+              <p>Дякую за зауваження, виправлю до наступної версії.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+        <span>Підтримка</span>
+        <button class="chat-close" onclick="toggleChat()">×</button>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-placeholder" id="chatPlaceholder">
+            <img src="icons/hello-sticker.png" alt="Привітання" class="chat-sticker">
+            <p>Як ми можемо вам допомогти ?</p>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <textarea id="chatInput" placeholder="Введіть повідомлення..."></textarea>
+        <button id="sendButton" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+</body>
+</html>
