@@ -4,80 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Сповіщення</title>
-  <link rel="stylesheet" href="index_style.css">
-  <link rel="stylesheet" href="notification_style.css">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/notification_style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
-<script type="module" src="index_animation.js"></script>
-<script type="module" src="notification_animation.js"></script>
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="download_data/download_notification_list.js"></script>
+<script type="module" src="animation/notification_animation.js"></script>
 
 <body data-theme="light">
   <div class="admin-container">
 
     <!-- Навігаційний бар -->
     <div class="sidebar" id="sidebar">
-      <div class="user-profile" onclick="window.location.href='account.html'">
-        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
-        <div class="user-details">
-            <span class="user-name">Дерус Денис Олександрович</span>
-            <span class="user-group">Група АС-224</span>
-            <span class="user-list-number">Номер в списку: 5</span>
-        </div>
-      </div>
-
-      <nav class="sidebar-nav">
-        <div class="nav-section">
-          <div class="nav-section-title">Головне</div>
-          <a href="index.html" class="nav-link">
-            <span class="nav-icon">📊</span>
-            <span>Огляд</span>
-          </a>
-          <a href="students.html" class="nav-link">
-            <span class="nav-icon">👥</span>
-            <span>Студенти</span>
-          </a>
-          <a href="teachers.html" class="nav-link">
-            <span class="nav-icon">👨‍🏫</span>
-            <span>Викладачі</span>
-          </a>
-        </div>
-        <div class="nav-section">
-          <div class="nav-section-title">Управління</div>
-          <a href="tasks.html" class="nav-link">
-            <span class="nav-icon">✅</span>
-            <span>Завдання</span>
-          </a>
-          <a href="calendar.html" class="nav-link">
-            <span class="nav-icon">📆</span>
-            <span>Календар</span>
-          </a>
-        </div>
-        <div class="nav-section">
-          <div class="nav-section-title">Налаштування</div>
-          <a href="account.html" class="nav-link">
-            <span class="nav-icon">👤</span>
-            <span>Профіль</span>
-          </a>
-          <a href="notification.html" class="nav-link">
-            <span class="nav-icon">🔔</span>
-            <span>Сповіщення</span>
-          </a>
-          <a href="safety_page.html" class="nav-link">
-            <span class="nav-icon">🔒</span>
-            <span>Безпека</span>
-          </a>
-        </div>
-      </nav>
-      <div class="sidebar-footer">
-        <div class="sidebar-support" onclick="toggleChat()">
-          <div class="support-icon">💬</div>
-          <div class="support-info">
-            <div class="support-title">Підтримка</div>
-            <div class="support-text">Чат і соц. мережі</div>
-          </div>
-        </div>
-      </div>
+      
     </div>
 
 
@@ -88,18 +31,18 @@
           <button id="sidebar-toggle" class="sidebar-toggle">
             <i class="fas fa-bars"></i>
           </button>
-          <h1 class="main-title fluid" style="--font-level: 2;">Повідомлення</h1>
+          <h1 class="main-title fluid header-text" style="--font-level: 2;">Повідомлення</h1>
         </div>
         <div class="header-actions">
           <a href="notification.html">
             <button class="notification-bell">
-              <i class="fas fa-bell"></i>
-              <span class="notification-badge">*</span>
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
             </button>
           </a>
           <button id="theme-toggle" class="theme-toggle">
-            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
-            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
           </button>
         </div>
       </header>
@@ -109,29 +52,29 @@
         <div class="card">
           <div class="card-header">
             <h2 class="card-title">Всі сповіщення</h2>
-            <a href="#" class="card-action">Позначити все як прочитане</a>
+            <a href="#" class="card-action card-main-text">Позначити все як прочитане</a>
           </div>
           
           <div class="notification-filters">
-            <button class="filter-btn active">Всі (8)</button>
-            <button class="filter-btn">Непрочитані (4)</button>
-            <button class="filter-btn">Високий пріоритет (2)</button>
-            <button class="filter-btn">Системні (3)</button>
-            <button class="filter-btn">Академічні (5)</button>
+            <button class="filter-btn active card-main-tex">Всі (8)</button>
+            <button class="filter-btn card-main-text">Непрочитані (4)</button>
+            <button class="filter-btn card-main-text">Високий пріоритет (2)</button>
+            <button class="filter-btn card-main-text">Системні (3)</button>
+            <button class="filter-btn card-main-text">Академічні (5)</button>
           </div>
           
           <div class="notification-list">
             <div class="notification-item unread priority-high">
-              <div class="notification-icon">❗</div>
+              <div class="notification-icon large-card-text">❗</div>
               <div class="notification-content">
                 <div class="notification-header">
                   <h3 class="notification-title">
-                    <span class="unread-badge"></span>
+                    <span class="unread-badge large-card-text"></span>
                     Терміновий дедлайн
                   </h3>
-                  <span class="notification-time">5 хвилин тому</span>
+                  <span class="notification-time card-main-text">5 хвилин тому</span>
                 </div>
-                <p class="notification-message">Завтра закінчується термін подачі документів для участі в науковій конференції. Будь ласка, перевірте заявки студентів.</p>
+                <p class="notification-message card-main-text">Завтра закінчується термін подачі документів для участі в науковій конференції. Будь ласка, перевірте заявки студентів.</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Переглянути">
                     <i class="fas fa-eye"></i>
@@ -144,16 +87,16 @@
             </div>
             
             <div class="notification-item unread priority-medium">
-              <div class="notification-icon">📝</div>
+              <div class="notification-icon large-card-text">📝</div>
               <div class="notification-content">
                 <div class="notification-header">
                   <h3 class="notification-title">
-                    <span class="unread-badge"></span>
+                    <span class="unread-badge card-main-text"></span>
                     Нове завдання від керівника
                   </h3>
-                  <span class="notification-time">1 годину тому</span>
+                  <span class="notification-time card-main-text">1 годину тому</span>
                 </div>
-                <p class="notification-message">Вам призначено нове завдання "Перевірка семестрових робіт". Дедлайн: 27 березня 2025 року.</p>
+                <p class="notification-message card-main-text">Вам призначено нове завдання "Перевірка семестрових робіт". Дедлайн: 27 березня 2025 року.</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Прийняти">
                     <i class="fas fa-check"></i>
@@ -169,16 +112,16 @@
             </div>
             
             <div class="notification-item unread">
-              <div class="notification-icon">👩‍🎓</div>
+              <div class="notification-icon large-card-text">👩‍🎓</div>
               <div class="notification-content">
                 <div class="notification-header">
                   <h3 class="notification-title">
-                    <span class="unread-badge"></span>
+                    <span class="unread-badge large-card-text"></span>
                     Запит від студента
                   </h3>
-                  <span class="notification-time">3 години тому</span>
+                  <span class="notification-time card-main-text">3 години тому</span>
                 </div>
-                <p class="notification-message">Студент Олександр Петренко надіслав запит на перегляд оцінки з предмету "Програмування".</p>
+                <p class="notification-message card-main-text">Студент Олександр Петренко надіслав запит на перегляд оцінки з предмету "Програмування".</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Прийняти">
                     <i class="fas fa-check"></i>
@@ -194,16 +137,16 @@
             </div>
             
             <div class="notification-item unread">
-              <div class="notification-icon">🔄</div>
+              <div class="notification-icon large-card-text">🔄</div>
               <div class="notification-content">
                 <div class="notification-header">
                   <h3 class="notification-title">
-                    <span class="unread-badge"></span>
+                    <span class="unread-badge large-card-text"></span>
                     Оновлення системи
                   </h3>
-                  <span class="notification-time">Вчора, 15:30</span>
+                  <span class="notification-time card-main-text">Вчора, 15:30</span>
                 </div>
-                <p class="notification-message">Планове оновлення системи відбудеться у неділю, 23 березня 2025, з 02:00 до 04:00. Система буде недоступна протягом цього часу.</p>
+                <p class="notification-message card-main-text">Планове оновлення системи відбудеться у неділю, 23 березня 2025, з 02:00 до 04:00. Система буде недоступна протягом цього часу.</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Прийняти">
                     <i class="fas fa-check"></i>
@@ -213,13 +156,13 @@
             </div>
             
             <div class="notification-item priority-medium">
-              <div class="notification-icon">📊</div>
+              <div class="notification-icon large-card-text">📊</div>
               <div class="notification-content">
                 <div class="notification-header">
-                  <h3 class="notification-title">Звіт про успішність</h3>
-                  <span class="notification-time">20 березня 2025</span>
+                  <h3 class="notification-title large-card-text">Звіт про успішність</h3>
+                  <span class="notification-time card-main-text">20 березня 2025</span>
                 </div>
-                <p class="notification-message">Щомісячний звіт про успішність студентів доступний для перегляду. Показники покращилися на 3% у порівнянні з минулим місяцем.</p>
+                <p class="notification-message card-main-text">Щомісячний звіт про успішність студентів доступний для перегляду. Показники покращилися на 3% у порівнянні з минулим місяцем.</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Прийняти">
                     <i class="fas fa-check"></i>
@@ -235,13 +178,13 @@
             </div>
             
             <div class="notification-item">
-              <div class="notification-icon">📧</div>
+              <div class="notification-icon large-card-text">📧</div>
               <div class="notification-content">
                 <div class="notification-header">
-                  <h3 class="notification-title">Нове повідомлення</h3>
-                  <span class="notification-time">19 березня 2025</span>
+                  <h3 class="notification-title large-card-text">Нове повідомлення</h3>
+                  <span class="notification-time card-main-text">19 березня 2025</span>
                 </div>
-                <p class="notification-message">Ви отримали нове повідомлення від колеги Ірини Мельник щодо координації розкладу іспитів.</p>
+                <p class="notification-message card-main-text">Ви отримали нове повідомлення від колеги Ірини Мельник щодо координації розкладу іспитів.</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Переглянути">
                     <i class="fas fa-eye"></i>
@@ -257,13 +200,13 @@
             </div>
             
             <div class="notification-item">
-              <div class="notification-icon">🎓</div>
+              <div class="notification-icon large-card-text">🎓</div>
               <div class="notification-content">
                 <div class="notification-header">
-                  <h3 class="notification-title">Запрошення на захист дипломів</h3>
-                  <span class="notification-time">18 березня 2025</span>
+                  <h3 class="notification-title large-card-text">Запрошення на захист дипломів</h3>
+                  <span class="notification-time card-main-text">18 березня 2025</span>
                 </div>
-                <p class="notification-message">Вас запрошено до участі у захисті дипломних робіт студентів групи ПІ-43, який відбудеться 15 квітня 2025 року о 10:00.</p>
+                <p class="notification-message card-main-text">Вас запрошено до участі у захисті дипломних робіт студентів групи ПІ-43, який відбудеться 15 квітня 2025 року о 10:00.</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Прийняти">
                     <i class="fas fa-check"></i>
@@ -279,13 +222,13 @@
             </div>
             
             <div class="notification-item priority-low">
-              <div class="notification-icon">📅</div>
+              <div class="notification-icon large-card-text">📅</div>
               <div class="notification-content">
                 <div class="notification-header">
-                  <h3 class="notification-title">Нагадування про зустріч</h3>
-                  <span class="notification-time">15 березня 2025</span>
+                  <h3 class="notification-title large-card-text">Нагадування про зустріч</h3>
+                  <span class="notification-time card-main-text">15 березня 2025</span>
                 </div>
-                <p class="notification-message">Нагадування: засідання кафедри відбудеться 25 березня 2025 року о 13:00 в аудиторії 305.</p>
+                <p class="notification-message card-main-text">Нагадування: засідання кафедри відбудеться 25 березня 2025 року о 13:00 в аудиторії 305.</p>
                 <div class="notification-actions">
                   <button class="notification-btn btn-primary" title="Додати в календар">
                     <i class="fas fa-calendar-plus"></i>
@@ -301,22 +244,7 @@
   
   <!-- Чат-вікно -->
   <div class="chat-container" id="chatContainer">
-    <div class="chat-header">
-        <span>Підтримка</span>
-        <button class="chat-close" onclick="toggleChat()">×</button>
-    </div>
     
-    <div class="chat-messages" id="chatMessages">
-        <div class="chat-placeholder" id="chatPlaceholder">
-            <img src="icons/hello-sticker.png" alt="Привітання" class="chat-sticker">
-            <p>Як ми можемо вам допомогти ?</p>
-        </div>
-    </div>
-
-    <div class="chat-input-container">
-        <textarea id="chatInput" placeholder="Введіть повідомлення..."></textarea>
-        <button id="sendButton" onclick="sendMessage()">➤</button>
-    </div>
   </div>
   
 </body>

@@ -1,0 +1,370 @@
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Особистий кабінет | Система дипломних робіт</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/account.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid" style="--font-level: 2;">Особистий Кабінет</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="dashboard-grid">
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Особиста інформація</h2>
+                <a class="card-action" onclick="toggleEditMode()">Редагувати</a>
+              </div>
+              
+              <div id="profileViewMode">
+                <div class="profile-info">
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">ПІБ:</div>
+                    <div class="profile-value card-main-text">Дерус Денис Олександрович</div>
+                  </div>
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">Група:</div>
+                    <div class="profile-value card-main-text">АС-224</div>
+                  </div>
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">Факультет:</div>
+                    <div class="profile-value card-main-text">Комп'ютерних наук та кібернетики</div>
+                  </div>
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">Спеціальність:</div>
+                    <div class="profile-value card-main-text">121 - Інженерія програмного забезпечення</div>
+                  </div>
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">Курс:</div>
+                    <div class="profile-value card-main-text">4</div>
+                  </div>
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">Студентський квиток:</div>
+                    <div class="profile-value card-main-text">АС12345678</div>
+                  </div>
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">Телефон:</div>
+                    <div class="profile-value card-main-text">+380 98 765 4321</div>
+                  </div>
+                  <div class="profile-row">
+                    <div class="profile-label l-card-text">Email:</div>
+                    <div class="profile-value card-main-text">denis.derus@student.knu.ua</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div id="profileEditMode" style="display: none;">
+                <form id="editProfileForm">
+                  <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" value="+380 98 765 4321" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="denis.derus@student.knu.ua" class="form-control">
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="btn btn-save" onclick="saveProfile()">Зберегти</button>
+                    <button type="button" class="btn btn-cancel" onclick="cancelEdit()">Скасувати</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Науковий керівник</h2>
+              </div>
+              <div class="advisor-info">
+                <div class="advisor-photo-container">
+                  <img src="icons/advisor-photo.jpg" alt="Фото наукового керівника" class="advisor-photo">
+                </div>
+                <div class="advisor-details">
+                  <h3 class="advisor-name l-card-text">Петренко Олег Михайлович</h3>
+                  <p class="advisor-title l-card-text">Доцент кафедри програмної інженерії</p>
+                  <p class="advisor-contact card-main-text"><i class="fas fa-envelope"></i> o.petrenko@knu.ua</p>
+                  <p class="advisor-contact card-main-text"><i class="fas fa-phone"></i> +380 44 123 4567</p>
+                  <p class="advisor-schedule card-main-text"><i class="fas fa-calendar"></i> Консультації: Вт, Чт 14:00-16:00</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Прогрес дипломної роботи</h2>
+              </div>
+              <div class="thesis-progress">
+                <div class="overall-progress">
+                  <div class="progress-header">
+                    <span class="card-large-text">Загальний прогрес:</span>
+                    <span class="card-main-text">67%</span>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar-full">
+                      <div class="progress-bar-fill" style="width: 67%;"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="progress-stages">
+                  <div class="progress-stage completed">
+                    <div class="stage-status card-large-text">✓</div>
+                    <div class="stage-info">
+                      <div class="stage-name card-large-text">Вибір теми</div>
+                      <div class="stage-date card-main-text">Завершено: 15.02.2025</div>
+                    </div>
+                  </div>
+                  <div class="progress-stage completed">
+                    <div class="stage-status card-large-text">✓</div>
+                    <div class="stage-info">
+                      <div class="stage-name card-large-text">План роботи</div>
+                      <div class="stage-date card-main-text">Завершено: 01.03.2025</div>
+                    </div>
+                  </div>
+                  <div class="progress-stage completed">
+                    <div class="stage-status card-large-text">✓</div>
+                    <div class="stage-info">
+                      <div class="stage-name card-large-text">Вступ</div>
+                      <div class="stage-date card-main-text">Завершено: 10.03.2025</div>
+                    </div>
+                  </div>
+                  <div class="progress-stage active">
+                    <div class="stage-status card-large-text">⚡</div>
+                    <div class="stage-info">
+                      <div class="stage-name card-large-text">Літературний огляд</div>
+                      <div class="stage-date card-main-text">В процесі</div>
+                    </div>
+                  </div>
+                  <div class="progress-stage">
+                    <div class="stage-status card-large-text">○</div>
+                    <div class="stage-info">
+                      <div class="stage-name card-large-text">Практична частина</div>
+                      <div class="stage-date card-main-text">Початок: 01.04.2025</div>
+                    </div>
+                  </div>
+                  <div class="progress-stage">
+                    <div class="stage-status card-large-text">○</div>
+                    <div class="stage-info">
+                      <div class="stage-name card-large-text">Висновки та додатки</div>
+                      <div class="stage-date card-main-text">Початок: 15.04.2025</div>
+                    </div>
+                  </div>
+                  <div class="progress-stage">
+                    <div class="stage-status card-large-text">○</div>
+                    <div class="stage-info">
+                      <div class="stage-name card-large-text">Фінальна версія</div>
+                      <div class="stage-date card-main-text">Дедлайн: 15.05.2025</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Оцінки за етапи роботи</h2>
+              </div>
+              <div class="grades-table-container">
+                <table class="grades-table">
+                  <thead>
+                    <tr>
+                      <th class="card-large-text">Етап</th>
+                      <th class="card-large-text">Оцінка</th>
+                      <th class="card-large-text">Макс. бал</th>
+                      <th class="card-large-text">Дата</th>
+                      <th class="card-large-text">Коментар</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="l-card-text">Вибір теми</td>
+                      <td class="grade excellent card-main-text">10</td>
+                      <td class="card-main-text">10</td>
+                      <td class="card-main-text">15.02.2025</td>
+                      <td class="card-main-text">Актуальна та цікава тема</td>
+                    </tr>
+                    <tr>
+                      <td class="l-card-text">План роботи</td>
+                      <td class="grade good">8</td>
+                      <td class="card-main-text">10</td>
+                      <td class="card-main-text">01.03.2025</td>
+                      <td class="card-main-text">Добре структуровано, потребує уточнень</td>
+                    </tr>
+                    <tr>
+                      <td class="l-card-text">Вступ</td>
+                      <td class="grade excellent card-main-text">9</td>
+                      <td class="card-main-text">10</td>
+                      <td class="card-main-text">10.03.2025</td>
+                      <td class="card-main-text">Чітко сформульована мета та завдання</td>
+                    </tr>
+                    <tr>
+                      <td class="l-card-text">Літературний огляд</td>
+                      <td class="grade pending card-main-text">-</td>
+                      <td class="card-main-text">15</td>
+                      <td class="card-main-text">-</td>
+                      <td class="card-main-text">На перевірці</td>
+                    </tr>
+                    <tr>
+                      <td class="l-card-text">Практична частина</td>
+                      <td class="grade pending card-main-text">-</td>
+                      <td class="card-main-text">25</td>
+                      <td class="card-main-text">-</td>
+                      <td class="card-main-text">Не розпочато</td>
+                    </tr>
+                    <tr>
+                      <td class="l-card-text">Висновки та додатки</td>
+                      <td class="grade pending card-main-text">-</td>
+                      <td class="card-main-text">15</td>
+                      <td class="card-main-text">-</td>
+                      <td class="card-main-text">Не розпочато</td>
+                    </tr>
+                    <tr>
+                      <td class="l-card-text">Фінальна версія</td>
+                      <td class="grade pending card-main-text">-</td>
+                      <td class="card-main-text">15</td>
+                      <td class="card-main-text">-</td>
+                      <td class="card-main-text">Не розпочато</td>
+                    </tr>
+                    <tr class="total-row">
+                      <td class="l-card-text">Загальний бал</td>
+                      <td colspan="2" class="card-main-text">27 / 100</td>
+                      <td colspan="2" class="card-main-text">Попередня оцінка: Добре</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Остання активність</h2>
+              </div>
+              <ul class="activity-list">
+                <li class="activity-item">
+                  <div class="activity-icon upload card-large-text">📤</div>
+                  <div class="activity-info">
+                    <div class="activity-title l-card-text">Завантажено файл "Літературний огляд v2.docx"</div>
+                    <div class="activity-meta card-main-text">20.03.2025, 14:32</div>
+                  </div>
+                </li>
+                <li class="activity-item">
+                  <div class="activity-icon comment card-large-text">💬</div>
+                  <div class="activity-info">
+                    <div class="activity-title l-card-text">Коментар від керівника до "Вступ.docx"</div>
+                    <div class="activity-content card-main-text">"Добре написано, але уточніть актуальність та зв'язок з існуючими дослідженнями."</div>
+                    <div class="activity-meta card-main-text">18.03.2025, 11:15</div>
+                  </div>
+                </li>
+                <li class="activity-item">
+                  <div class="activity-icon grade card-large-text">🏆</div>
+                  <div class="activity-info">
+                    <div class="activity-title l-card-text">Отримано оцінку за етап "Вступ"</div>
+                    <div class="activity-content card-main-text">Оцінка: 9/10</div>
+                    <div class="activity-meta card-main-text">15.03.2025, 16:40</div>
+                  </div>
+                </li>
+                <li class="activity-item">
+                  <div class="activity-icon upload card-large-text">📤</div>
+                  <div class="activity-info">
+                    <div class="activity-title l-card-text">Завантажено файл "Вступ.docx"</div>
+                    <div class="activity-meta card-main-text">10.03.2025, 09:22</div>
+                  </div>
+                </li>
+                <li class="activity-item">
+                  <div class="activity-icon meeting card-large-text">📅</div>
+                  <div class="activity-info">
+                    <div class="activity-title l-card-text">Заплановано зустріч з керівником</div>
+                    <div class="activity-content card-main-text">Тема: Обговорення літературного огляду</div>
+                    <div class="activity-meta card-main-text">05.03.2025, 12:30 - 13:00, ауд. 412</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h3 class="deadlines-title card-title">📅 Найближчі дедлайни</h3>
+              </div>
+              <ul class="deadlines-list account-deadlines">
+                <li class="deadline-item urgent">
+                  <div class="deadline-date card-large-text">25 бер</div>
+                  <div class="deadline-info">
+                    <div class="deadline-title card-large-text">Літературний огляд</div>
+                    <div class="deadline-meta card-main-text">Залишилось: менше 1 дня</div>
+                  </div>
+                </li>
+                <li class="deadline-item">
+                  <div class="deadline-date card-large-text">5 кві</div>
+                  <div class="deadline-info">
+                    <div class="deadline-title card-large-text">Практична частина</div>
+                    <div class="deadline-meta card-main-text">Залишилось: 15 днів</div>
+                  </div>
+                </li>
+                <li class="deadline-item">
+                  <div class="deadline-date card-large-text">20 кві</div>
+                  <div class="deadline-info">
+                    <div class="deadline-title card-large-text">Висновки та додатки</div>
+                    <div class="deadline-meta card-main-text">Залишилось: 30 днів</div>
+                  </div>
+                </li>
+                <li class="deadline-item">
+                  <div class="deadline-date card-large-text">15 тра</div>
+                  <div class="deadline-info">
+                    <div class="deadline-title card-large-text">Фінальна версія роботи</div>
+                    <div class="deadline-meta card-main-text">Залишилось: 55 днів</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    
+  </div>
+</body>
+</html>

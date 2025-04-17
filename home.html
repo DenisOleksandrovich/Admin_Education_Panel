@@ -3,14 +3,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Одеська політехніка | Система дипломних робіт</title>
-
-  <link rel="stylesheet" href="index_style.css">
-  <link rel="stylesheet" href="home_style.css">
   <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/home_style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
-<script type="module" src="index_animation.js"></script>
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/home.js"></script>
 
 <body data-theme="light">
   <div id="alertBox" class="alert-box"></div>
@@ -18,55 +18,54 @@
 
     <!-- Навігаційний бар -->
     <div class="sidebar" id="sidebar">
-      <div class="user-profile" onclick="window.location.href='account.html'">
-        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
+      <div class="user-profile guest" onclick="window.location.href='login.html'">
+        <div class="user-photo placeholder-icon">❓</div>
         <div class="user-details">
-            <span class="user-name">Дерус Денис Олександрович</span>
-            <span class="user-group">Група АС-224</span>
-            <span class="user-list-number">Номер в списку: 5</span>
+          <span class="user-name">Ви не авторизовані</span>
+          <span class="user-group">Натисніть для входу</span>
         </div>
       </div>
 
       <nav class="sidebar-nav">
         <div class="nav-section">
-          <div class="nav-section-title">Головне</div>
+          <div class="menu-nav-text nav-section-title">Головне</div>
           <a href="index.html" class="nav-link">
             <span class="nav-icon">📊</span>
-            <span>Огляд</span>
+            <span class="menu-nav-text">Огляд</span>
           </a>
           <a href="students.html" class="nav-link">
             <span class="nav-icon">👥</span>
-            <span>Студенти</span>
+            <span class="menu-nav-text">Студенти</span>
           </a>
           <a href="teachers.html" class="nav-link">
             <span class="nav-icon">👨‍🏫</span>
-            <span>Викладачі</span>
+            <span class="menu-nav-text">Викладачі</span>
           </a>
         </div>
         <div class="nav-section">
           <div class="nav-section-title">Управління</div>
           <a href="tasks.html" class="nav-link">
             <span class="nav-icon">✅</span>
-            <span>Завдання</span>
+            <span class="menu-nav-text">Завдання</span>
           </a>
           <a href="calendar.html" class="nav-link">
             <span class="nav-icon">📆</span>
-            <span>Календар</span>
+            <span class="menu-nav-text">Календар</span>
           </a>
         </div>
         <div class="nav-section">
           <div class="nav-section-title">Налаштування</div>
           <a href="account.html" class="nav-link">
             <span class="nav-icon">👤</span>
-            <span>Профіль</span>
+            <span class="menu-nav-text">Профіль</span>
           </a>
           <a href="notification.html" class="nav-link">
             <span class="nav-icon">🔔</span>
-            <span>Сповіщення</span>
+            <span class="menu-nav-text">Сповіщення</span>
           </a>
           <a href="safety_page.html" class="nav-link">
             <span class="nav-icon">🔒</span>
-            <span>Безпека</span>
+            <span class="menu-nav-text">Безпека</span>
           </a>
         </div>
       </nav>
@@ -74,8 +73,8 @@
         <div class="sidebar-support" onclick="toggleChat()">
           <div class="support-icon">💬</div>
           <div class="support-info">
-            <div class="support-title">Підтримка</div>
-            <div class="support-text">Чат і соц. мережі</div>
+            <div class="menu-nav-text support-title">Підтримка</div>
+            <div class="menu-nav-text support-text">Чат і соц. мережі</div>
           </div>
         </div>
       </div>
@@ -89,76 +88,70 @@
           <button id="sidebar-toggle" class="sidebar-toggle">
             <i class="fas fa-bars"></i>
           </button>
-          <h1 class="main-title fluid" style="--font-level: 2;">Головна сторінка</h1>
+          <h1 class="main-title header-text">Домашня сторінка</h1>
         </div>
         <div class="header-actions">
           <a href="notification.html">
             <button class="notification-bell">
-              <i class="fas fa-bell"></i>
-              <span class="notification-badge">*</span>
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">?</span>
             </button>
           </a>
           <button id="theme-toggle" class="theme-toggle">
-            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
-            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
           </button>
         </div>
       </header>
 
       <div class="page-content">
         <section class="hero-section">
-          <h1 class="hero-title">Одеський національний політехнічний університет</h1>
-          <p class="hero-subtitle">Система управління дипломними роботами - сучасний інструмент для ефективної взаємодії студентів та викладачів</p>
+          <h1 class="hero-title card-title">Одеський національний політехнічний університет</h1>
+          <p class="hero-subtitle card-large-text">Система управління дипломними роботами - сучасний інструмент для ефективної взаємодії студентів та викладачів</p>
           
           <div class="polytechnic-image-container">
             <img src="https://odesa.one/wp-content/uploads/sites/12/2022/07/picturepicture_160216259282541577318435_66130.jpeg" alt="Одеська Політехніка" class="polytechnic-image" />
-            <div class="polytechnic-image-caption">
+            <div class="polytechnic-image-caption card-large-text">
               Одеська політехніка - з 1918 року
             </div>
           </div>
         </section>
 
         <section class="info-section">
-          <h2 class="info-section-title">Про університет</h2>
-          <div class="info-content">
-            <p>Одеський національний політехнічний університет (Одеська політехніка) - один з найбільших і найстаріших технічних університетів України, заснований в 1918 році. Університет є провідним науковим та освітнім центром південного регіону України.</p>
-            <p>Університет здійснює підготовку бакалаврів, магістрів та докторів філософії за різними спеціальностями в галузі інженерії, комп'ютерних наук, економіки, менеджменту та інших напрямках.</p>
-            <p>На сьогоднішній день в університеті навчається понад 10 000 студентів, працює більше 1000 викладачів, серед яких доктори та кандидати наук, професори, доценти.</p>
+          <h2 class="info-section-title card-title">Про університет</h2>
+          <div class="info-content card-main-text">
+            <p class="card-main-text">Одеський національний політехнічний університет (Одеська політехніка) - один з найбільших і найстаріших технічних університетів України, заснований в 1918 році. Університет є провідним науковим та освітнім центром південного регіону України.</p>
+            <p class="card-main-text">Університет здійснює підготовку бакалаврів, магістрів та докторів філософії за різними спеціальностями в галузі інженерії, комп'ютерних наук, економіки, менеджменту та інших напрямках.</p>
+            <p class="card-main-text">На сьогоднішній день в університеті навчається понад 10 000 студентів, працює більше 1000 викладачів, серед яких доктори та кандидати наук, професори, доценти.</p>
           </div>
         </section>
 
         <section class="info-section">
-          <h2 class="info-section-title">Функції системи дипломних робіт</h2>
+          <h2 class="info-section-title card-title">Функції системи дипломних робіт</h2>
           <div class="features-grid">
             <div class="feature-card">
-              <div class="feature-icon">📝</div>
-              <h3 class="feature-title">Управління роботами</h3>
-              <p>Зручна система для відстеження прогресу, завантаження файлів, отримання відгуків та керування версіями дипломних робіт.</p>
+              <h3 class="feature-title card-large-text">📝 Управління роботами</h3>
+              <p class="card-main-text">Зручна система для відстеження прогресу, завантаження файлів, отримання відгуків та керування версіями дипломних робіт.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">👨‍👩‍👧‍👦</div>
-              <h3 class="feature-title">Взаємодія з керівниками</h3>
-              <p>Пряма комунікація з науковими керівниками, отримання зворотнього зв'язку та консультацій онлайн в режимі реального часу.</p>
+              <h3 class="feature-title card-large-text">👨‍👩‍👧‍👦 Взаємодія з керівниками</h3>
+              <p class="card-main-text">Пряма комунікація з науковими керівниками, отримання зворотнього зв'язку та консультацій онлайн в режимі реального часу.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">📅</div>
-              <h3 class="feature-title">Календар дедлайнів</h3>
-              <p>Система нагадувань та відстеження важливих термінів, що допомагає ефективно планувати роботу і вчасно виконувати завдання.</p>
+              <h3 class="feature-title card-large-text">📅 Календар дедлайнів</h3>
+              <p class="card-main-text">Система нагадувань та відстеження важливих термінів, що допомагає ефективно планувати роботу і вчасно виконувати завдання.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">📊</div>
-              <h3 class="feature-title">Аналітика прогресу</h3>
-              <p>Детальна статистика та візуалізація прогресу роботи, що дозволяє краще контролювати процес написання дипломної роботи.</p>
+              <h3 class="feature-title card-large-text">📊 Аналітика прогресу</h3>
+              <p class="card-main-text">Детальна статистика та візуалізація прогресу роботи, що дозволяє краще контролювати процес написання дипломної роботи.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">📚</div>
-              <h3 class="feature-title">Бібліотека ресурсів</h3>
-              <p>Доступ до методичних матеріалів, прикладів оформлення та інших корисних ресурсів для якісного виконання дипломної роботи.</p>
+              <h3 class="feature-title card-large-text">📚 Бібліотека ресурсів</h3>
+              <p class="card-main-text">Доступ до методичних матеріалів, прикладів оформлення та інших корисних ресурсів для якісного виконання дипломної роботи.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">🔒</div>
-              <h3 class="feature-title">Захист даних</h3>
-              <p>Безпечне зберігання всіх матеріалів з контролем доступу, що захищає вашу інтелектуальну власність та персональні дані.</p>
+              <h3 class="feature-title card-large-text">🔒 Захист даних</h3>
+              <p class="card-main-text">Безпечне зберігання всіх матеріалів з контролем доступу, що захищає вашу інтелектуальну власність та персональні дані.</p>
             </div>
           </div>
         </section>
@@ -169,49 +162,7 @@
 
   <!-- Чат-вікно -->
   <div class="chat-container" id="chatContainer">
-    <div class="chat-header">
-        <span>Підтримка</span>
-        <button class="chat-close" onclick="toggleChat()">×</button>
-    </div>
     
-    <div class="chat-messages" id="chatMessages">
-        <div class="chat-placeholder" id="chatPlaceholder">
-            <img src="icons/hello-sticker.png" alt="Привітання" class="chat-sticker">
-            <p>Як ми можемо вам допомогти ?</p>
-        </div>
-    </div>
-
-    <div class="chat-input-container">
-        <textarea id="chatInput" placeholder="Введіть повідомлення..."></textarea>
-        <button id="sendButton" onclick="sendMessage()">➤</button>
-    </div>
   </div>
-
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const mainContent = document.getElementById('main-content');
-    
-      const blockedLinks = document.querySelectorAll('.blocked-link');
-      blockedLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          showAlert('Увійдіть в систему для доступу до цієї сторінки');
-        });
-      });
-    
-      window.showAlert = function(message) {
-        const alertBox = document.getElementById('alertBox');
-        alertBox.textContent = message;
-        alertBox.style.display = 'block';
-        
-        setTimeout(() => {
-          alertBox.style.display = 'none';
-        }, 3000);
-      };
-    });
-  </script>
-
-
 </body>
 </html>

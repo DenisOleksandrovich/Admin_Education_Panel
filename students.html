@@ -3,81 +3,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Студенти | Система дипломнх робіт</title>
-
-  <link rel="stylesheet" href="index_style.css">
-  <link rel="stylesheet" href="students_style.css">
   <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/students_style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
-<script type="module" src="index_animation.js"></script>
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="animation/students_animation.js"></script>
 
 <body data-theme="light">
   <div class="admin-container">
 
     <!-- Навігаційний бар -->
     <div class="sidebar" id="sidebar">
-      <div class="user-profile" onclick="window.location.href='account.html'">
-        <img src="icons/portfolio-photo.jpg" alt="Фото студента" class="user-photo">
-        <div class="user-details">
-            <span class="user-name">Дерус Денис Олександрович</span>
-            <span class="user-group">Група АС-224</span>
-            <span class="user-list-number">Номер в списку: 5</span>
-        </div>
-      </div>
-
-      <nav class="sidebar-nav">
-        <div class="nav-section">
-          <div class="nav-section-title">Головне</div>
-          <a href="index.html" class="nav-link">
-            <span class="nav-icon">📊</span>
-            <span>Огляд</span>
-          </a>
-          <a href="students.html" class="nav-link">
-            <span class="nav-icon">👥</span>
-            <span>Студенти</span>
-          </a>
-          <a href="teachers.html" class="nav-link">
-            <span class="nav-icon">👨‍🏫</span>
-            <span>Викладачі</span>
-          </a>
-        </div>
-        <div class="nav-section">
-          <div class="nav-section-title">Управління</div>
-          <a href="tasks.html" class="nav-link">
-            <span class="nav-icon">✅</span>
-            <span>Завдання</span>
-          </a>
-          <a href="calendar.html" class="nav-link">
-            <span class="nav-icon">📆</span>
-            <span>Календар</span>
-          </a>
-        </div>
-        <div class="nav-section">
-          <div class="nav-section-title">Налаштування</div>
-          <a href="account.html" class="nav-link">
-            <span class="nav-icon">👤</span>
-            <span>Профіль</span>
-          </a>
-          <a href="notification.html" class="nav-link">
-            <span class="nav-icon">🔔</span>
-            <span>Сповіщення</span>
-          </a>
-          <a href="safety_page.html" class="nav-link">
-            <span class="nav-icon">🔒</span>
-            <span>Безпека</span>
-          </a>
-        </div>
-      </nav>
-      <div class="sidebar-footer">
-        <div class="sidebar-support" onclick="toggleChat()">
-          <div class="support-icon">💬</div>
-          <div class="support-info">
-            <div class="support-title">Підтримка</div>
-            <div class="support-text">Чат і соц. мережі</div>
-          </div>
-        </div>
-      </div>
+      
     </div>
 
 
@@ -88,18 +29,18 @@
           <button id="sidebar-toggle" class="sidebar-toggle">
             <i class="fas fa-bars"></i>
           </button>
-          <h1 class="main-title fluid" style="--font-level: 2;">Список студентів</h1>
+          <h1 class="main-title fluid header-text">Список студентів</h1>
         </div>
         <div class="header-actions">
           <a href="notification.html">
             <button class="notification-bell">
-              <i class="fas fa-bell"></i>
-              <span class="notification-badge">*</span>
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
             </button>
           </a>
           <button id="theme-toggle" class="theme-toggle">
-            <i class="fa-solid fa-moon " id="dark-icon" style="color: #B197FC; display: none;"></i>
-            <i class="fa-solid fa-sun" id="light-icon" style="color: #B197FC; display: none;"></i>
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
           </button>
         </div>
       </header>
@@ -107,27 +48,27 @@
       <div class="page-content">
         <!-- Search and Filters -->
         <div class="search-container">
-          <input type="text" placeholder="Пошук студентів за ім'ям, групою або статусом..." class="search-input">
+          <input type="text" placeholder="Пошук студентів за ім'ям, групою або статусом..." class="search-input card-main-text">
           <button class="filter-button">
-            <i class="fa fa-sliders"></i> Фільтри
+            <i class="fa fa-sliders card-main-text"></i> <span class="card-main-text">Фільтри</span>
           </button>
         </div>
         
         <div class="filter-container">
           <div class="filter-button active">
-            <i class="fa fa-users"></i> Всі студенти
+            <i class="fa fa-users card-main-text"></i> <span class="card-main-text">Всі студенти</span>
           </div>
           <div class="filter-button">
-            <i class="fa fa-graduation-cap"></i> Група АС-224
+            <i class="fa fa-graduation-cap card-main-text"></i> <span class="card-main-text">ІТ кафедра</span>
           </div>
           <div class="filter-button">
-            <i class="fa fa-exclamation-triangle"></i> Потребують уваги
+            <i class="fa fa-exclamation-triangle card-main-text"></i> <span class="card-main-text">Потребують уваги</span>
           </div>
           <div class="filter-button">
-            <i class="fa fa-check-circle"></i> Завершили роботу
+            <i class="fa fa-check-circle card-main-text"></i> <span class="card-main-text">Завершили роботу</span>
           </div>
           <div class="filter-button">
-            <i class="fa fa-hourglass-half"></i> Наближаються дедлайни
+            <i class="fa fa-hourglass-half card-main-text"></i> <span class="card-main-text">Наближаються дедлайни</span>
           </div>
         </div>
 
@@ -135,301 +76,28 @@
         <div class="students-grid">
           <div class="student-card">
             <div class="student-header">
-              <div class="student-avatar-large">АМ</div>
+              <div class="student-avatar-large l-card-text">?</div>
               <div class="student-details">
-                <h3 class="student-name-large">Андрій Малюта</h3>
-                <span class="status-badge status-active">Активний</span>
+                <h3 class="student-name-large l-card-text">?</h3>
+                <span class="status-badge status-active l-card-text">?</span>
               </div>
             </div>
             <div class="student-meta">
               <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-224</span>
+                <span class="meta-label l-card-text">Група</span>
+                <span class="meta-value card-main-text">?</span>
               </div>
               <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">95%</span>
+                <span class="meta-label l-card-text">Прогрес</span>
+                <span class="meta-value card-main-text">?</span>
               </div>
               <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Розробка ІС</span>
+                <span class="meta-label l-card-text">Тема роботи</span>
+                <span class="meta-value card-main-text">?</span>
               </div>
               <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Ковальчук О.В.</span>
-              </div>
-            </div>
-            <div class="student-actions">
-              <div class="action-button">
-                <i class="fa fa-eye"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-file-alt"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-comment"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="student-card">
-            <div class="student-header">
-              <div class="student-avatar-large">МТ</div>
-              <div class="student-details">
-                <h3 class="student-name-large">Марія Ткаченко</h3>
-                <span class="status-badge status-active">Активний</span>
-              </div>
-            </div>
-            <div class="student-meta">
-              <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-222</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">92%</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Мобільний додаток</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Петренко М.І.</span>
-              </div>
-            </div>
-            <div class="student-actions">
-              <div class="action-button">
-                <i class="fa fa-eye"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-file-alt"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-comment"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="student-card">
-            <div class="student-header">
-              <div class="student-avatar-large">ВП</div>
-              <div class="student-details">
-                <h3 class="student-name-large">Віктор Павленко</h3>
-                <span class="status-badge status-warning">Потребує уваги</span>
-              </div>
-            </div>
-            <div class="student-meta">
-              <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-223</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">88%</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Веб-сервіс</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Іванов В.С.</span>
-              </div>
-            </div>
-            <div class="student-actions">
-              <div class="action-button">
-                <i class="fa fa-eye"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-file-alt"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-comment"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="student-card">
-            <div class="student-header">
-              <div class="student-avatar-large">НР</div>
-              <div class="student-details">
-                <h3 class="student-name-large">Наталія Романенко</h3>
-                <span class="status-badge status-active">Активний</span>
-              </div>
-            </div>
-            <div class="student-meta">
-              <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-221</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">85%</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Алгоритми ШІ</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Сидоренко К.М.</span>
-              </div>
-            </div>
-            <div class="student-actions">
-              <div class="action-button">
-                <i class="fa fa-eye"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-file-alt"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-comment"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="student-card">
-            <div class="student-header">
-              <div class="student-avatar-large">КП</div>
-              <div class="student-details">
-                <h3 class="student-name-large">Костянтин Петров</h3>
-                <span class="status-badge status-warning">Потребує уваги</span>
-              </div>
-            </div>
-            <div class="student-meta">
-              <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-224</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">62%</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Бази даних</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Марченко Д.В.</span>
-              </div>
-            </div>
-            <div class="student-actions">
-              <div class="action-button">
-                <i class="fa fa-eye"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-file-alt"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-comment"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="student-card">
-            <div class="student-header">
-              <div class="student-avatar-large">АС</div>
-              <div class="student-details">
-                <h3 class="student-name-large">Анна Сидорова</h3>
-                <span class="status-badge status-warning">Потребує уваги</span>
-              </div>
-            </div>
-            <div class="student-meta">
-              <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-224</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">45%</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Кібербезпека</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Ковальчук О.В.</span>
-              </div>
-            </div>
-            <div class="student-actions">
-              <div class="action-button">
-                <i class="fa fa-eye"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-file-alt"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-comment"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="student-card">
-            <div class="student-header">
-              <div class="student-avatar-large">МІ</div>
-              <div class="student-details">
-                <h3 class="student-name-large">Михайло Іванов</h3>
-                <span class="status-badge status-active">Активний</span>
-              </div>
-            </div>
-            <div class="student-meta">
-              <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-223</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">78%</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Нейронні мережі</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Петренко М.І.</span>
-              </div>
-            </div>
-            <div class="student-actions">
-              <div class="action-button">
-                <i class="fa fa-eye"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-file-alt"></i>
-              </div>
-              <div class="action-button">
-                <i class="fa fa-comment"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="student-card">
-            <div class="student-header">
-              <div class="student-avatar-large">ЄК</div>
-              <div class="student-details">
-                <h3 class="student-name-large">Єкатерина Козлова</h3>
-                <span class="status-badge status-active">Активний</span>
-              </div>
-            </div>
-            <div class="student-meta">
-              <div class="meta-item">
-                <span class="meta-label">Група</span>
-                <span class="meta-value">АС-222</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Прогрес</span>
-                <span class="meta-value">71%</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Тема роботи</span>
-                <span class="meta-value">Графічні додатки</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Керівник</span>
-                <span class="meta-value">Іванов В.С.</span>
+                <span class="meta-label l-card-text">Керівник</span>
+                <span class="meta-value card-main-text">?</span>
               </div>
             </div>
             <div class="student-actions">
@@ -448,13 +116,13 @@
 
         <div class="pagination">
           <div class="page-button disabled">
-            <i class="fa fa-chevron-left"></i>
+            <i class="fa fa-chevron-left card-main-text"></i>
           </div>
-          <div class="page-button active">1</div>
-          <div class="page-button">2</div>
-          <div class="page-button">3</div>
+          <div class="page-button active card-main-text">1</div>
+          <div class="page-button card-main-text">2</div>
+          <div class="page-button card-main-text">3</div>
           <div class="page-button">
-            <i class="fa fa-chevron-right"></i>
+            <i class="fa fa-chevron-right card-main-text"></i>
           </div>
         </div>
       </div>
@@ -463,35 +131,8 @@
 
   <!-- Чат-вікно -->
   <div class="chat-container" id="chatContainer">
-    <div class="chat-header">
-        <span>Підтримка</span>
-        <button class="chat-close" onclick="toggleChat()">×</button>
-    </div>
     
-    <div class="chat-messages" id="chatMessages">
-        <div class="chat-placeholder" id="chatPlaceholder">
-            <img src="icons/hello-sticker.png" alt="Привітання" class="chat-sticker">
-            <p>Як ми можемо вам допомогти ?</p>
-        </div>
-    </div>
-
-    <div class="chat-input-container">
-        <textarea id="chatInput" placeholder="Введіть повідомлення..."></textarea>
-        <button id="sendButton" onclick="sendMessage()">➤</button>
-    </div>
   </div>
 
-  <script>
-    document.querySelectorAll('.filter-button').forEach(button => {
-      button.addEventListener('click', function() {
-        if (!this.classList.contains('active')) {
-          document.querySelectorAll('.filter-button').forEach(btn => {
-            btn.classList.remove('active');
-          });
-          this.classList.add('active');
-        }
-      });
-    });
-  </script>
 </body>
 </html>
