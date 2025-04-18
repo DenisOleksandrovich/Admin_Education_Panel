@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Календар Подій</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/calendar_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="animation/calendar_animation.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title header-text">Календар Подій</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+          </button>
+        </div>
+      </header>
+    
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <div class="calendar-actions">
+            <div class="calendar-navigation">
+              <button class="nav-button card-large-text" id="prevMonth">◀</button>
+              <button class="nav-button card-large-text" id="todayButton">Сьогодні</button>
+              <button class="nav-button card-large-text" id="nextMonth">▶</button>
+            </div>
+            <div class="view-selector">
+              <button class="view-button card-large-text">День</button>
+              <button class="view-button card-large-text">Тиждень</button>
+              <button class="view-button active card-large-text">Місяць</button>
+              <button class="view-button card-large-text">Рік</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="event-legend">
+          <div class="legend-item">
+            <div class="legend-color legend-deadline"></div>
+            <span class="card-large-text">Дедлайн</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color legend-assignment"></div>
+            <span class="card-large-text">Нове завдання</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color legend-submission"></div>
+            <span class="card-large-text">Здача завдання</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color legend-personal"></div>
+            <span class="card-large-text">Особистий план</span>
+          </div>
+        </div>
+        
+        <div class="calendar-grid">
+          <div class="calendar-day-header card-large-text">Пн</div>
+          <div class="calendar-day-header card-large-text">Вт</div>
+          <div class="calendar-day-header card-large-text">Ср</div>
+          <div class="calendar-day-header card-large-text">Чт</div>
+          <div class="calendar-day-header card-large-text">Пт</div>
+          <div class="calendar-day-header card-large-text">Сб</div>
+          <div class="calendar-day-header card-large-text">Нд</div>
+          
+        </div>
+        
+        <div class="upcoming-events">
+          <div class="upcoming-title card-title">Найближчі події</div>
+          <ul class="upcoming-list" id="upcoming-events-list"></ul>
+          <div class="pagination" id="pagination">
+            <div class="page-button" id="prev-page">
+              <i class="fa fa-chevron-left"></i>
+            </div>
+            <div class="page-number" id="page-number">1</div>
+            <div class="page-button" id="next-page">
+              <i class="fa fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="eventModal" class="modal" style="display: none;">
+          <div class="modal-content">
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <h2 id="modal-event-name" class="card-title" style="text-align: center;" style="margin-bottom: 30px;">📌 Назва події</h2>
+        
+            <p><span class="card-large-text">📅 Дата: </span> <span id="modal-event-date" class="card-main-text"></span></p>
+            <p><span class="card-large-text">📍 Місце: </span> <span id="modal-event-venue" class="card-main-text"></span></p>
+            <p><span class="card-large-text">📌 Тип: </span> <span id="modal-event-type" class="card-main-text"></span></p>
+            <p><span class="card-large-text">⏱️ Тривалість: </span> <span id="modal-event-duration" class="card-main-text"></span><span class="card-main-text"> хв</span></p>
+            <p><span class="card-large-text">👨‍🏫 Викладач: </span> <span id="modal-event-supervisor" class="card-main-text"></span></p>
+            <p><span class="card-large-text">📝 Опис: </span> <span id="modal-event-description" class="card-main-text"></span></p>
+            <p><span class="card-large-text">👥 Групи: </span> <span id="modal-event-groups" class="card-main-text"></span></p>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    
+  </div>
+</body>
+</html>

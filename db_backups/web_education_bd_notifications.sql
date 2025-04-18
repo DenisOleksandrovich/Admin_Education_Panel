@@ -1,0 +1,65 @@
+CREATE DATABASE  IF NOT EXISTS `web_education_bd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `web_education_bd`;
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: web_education_bd
+-- ------------------------------------------------------
+-- Server version	8.0.41
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notifications` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `supervisor_id` int DEFAULT NULL,
+  `group_id` int DEFAULT NULL,
+  `type` enum('assignment','event','grade','message','system') DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `message` text,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `supervisor_id` (`supervisor_id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE,
+  CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`supervisor_id`) REFERENCES `supervisors` (`supervisor_id`) ON DELETE CASCADE,
+  CONSTRAINT `notifications_ibfk_3` FOREIGN KEY (`group_id`) REFERENCES `study_groups` (`study_group_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notifications`
+--
+
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (1,1,NULL,NULL,'assignment','Нове завдання з математики','Будь ласка, виконайте завдання до 15 квітня.','2025-04-14 13:46:42'),(2,2,NULL,NULL,'grade','Оцінка за лабораторну №2','Ваша оцінка: 95 з 100.','2025-04-14 13:46:42'),(3,3,NULL,NULL,'message','Повідомлення від деканату','Завтра об 11:00 відбудеться важлива зустріч в аудиторії 204.','2025-04-14 13:46:42'),(4,4,NULL,NULL,'assignment','Домашнє завдання з фізики','Не забудьте здати роботу до 17 квітня.','2025-04-14 13:46:42'),(5,5,NULL,NULL,'grade','Оцінка за контрольну з інформатики','Ваша оцінка: 87 з 100.','2025-04-14 13:46:42'),(6,6,NULL,NULL,'message','Попередження про відсутність','Ви пропустили 3 заняття підряд. Зверніться до деканату.','2025-04-14 13:46:42'),(7,NULL,NULL,1,'event','Мітинг групи АС-21-1','Зустріч з куратором запланована на понеділок 12:00.','2025-04-14 13:46:42'),(8,NULL,NULL,2,'message','Оголошення для групи КН-22-2','Наступна пара буде в дистанційному форматі.','2025-04-14 13:46:42'),(9,NULL,NULL,NULL,'system','Оновлення системи','Платформа буде тимчасово недоступна з 22:00 до 23:00.','2025-04-14 13:46:42'),(10,NULL,NULL,NULL,'system','Темна тема доступна!','Ви можете активувати темну тему в налаштуваннях профілю.','2025-04-14 13:46:42'),(11,NULL,NULL,NULL,'system','Планові технічні роботи','У ніч з 18 на 19 квітня можливі перебої в роботі системи.','2025-04-14 13:46:42'),(12,NULL,NULL,NULL,'system','Оновлено політику конфіденційності','Перевірте зміни в налаштуваннях акаунта.','2025-04-14 13:46:42'),(13,NULL,NULL,NULL,'system','Зміни в розкладі','Будь ласка, перевірте новий розклад у своєму профілі.','2025-04-14 13:46:42'),(14,NULL,NULL,NULL,'system','Додано нову функцію коментарів','Тепер ви можете коментувати завдання та оцінки.','2025-04-14 13:46:42'),(15,NULL,NULL,NULL,'system','Нові функції системи','Додано можливість залишати коментарі до завдань.','2025-04-14 13:46:42'),(16,NULL,2,NULL,'event','Засідання кафедри','Нагадування про засідання кафедри у вівторок об 15:00.','2025-04-14 13:46:42'),(17,NULL,3,NULL,'message','Нове повідомлення від адміністратора','Будь ласка, перевірте свою поштову скриньку.','2025-04-14 13:46:42'),(18,NULL,1,NULL,'assignment','Оцінювання студентів','Не забудьте виставити оцінки до кінця тижня.','2025-04-14 13:46:42'),(19,NULL,2,NULL,'message','Звіт про відвідуваність','Завантажте звіт до 20 квітня.','2025-04-14 13:46:42'),(20,NULL,3,NULL,'event','Онлайн-семінар для викладачів','Запрошення до участі в семінарі з використання LMS.','2025-04-14 13:46:42'),(21,3,NULL,NULL,'system','Тест1','Тест1','2025-04-15 12:32:22'),(22,4,NULL,NULL,'assignment','ТЕСТ2','ТЕСТ2','2025-04-15 12:37:45'),(25,5,NULL,NULL,'event','45455','fgffgggf','2025-04-15 12:39:53'),(26,5,NULL,NULL,'event','FFFFFF','fgffgggf','2025-04-15 12:40:03');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-04-17 16:52:37

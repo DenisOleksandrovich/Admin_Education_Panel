@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання | Система дипломних робіт</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/task_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/new_task_create.js"></script>
+<script type="module" src="animation/task_submission.js"></script>
+<script type="module" src="animation/tasks_animation.js"></script>
+<script type="module" src="animation/task_detail.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid header-text">Завдання</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="search-container">
+          <div class="search-input-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input card-main-text" id="taskSearch" placeholder="Пошук завдань за назвою, описом або типом...">
+            <button class="clear-search" id="clearSearch">
+              <i class="fas fa-times card-main-text"></i>
+            </button>
+          </div>
+          <button class="btn btn-primary" id="addTaskBtn">
+            <i class="fas fa-plus card-main-text"></i> <span class="card-main-text"> Нове завдання </span>
+          </button>
+        </div>
+
+        <div class="filter-container">
+          <button class="filter-button active" data-filter="all">
+            <i class="fas fa-th-list card-main-text"></i> <span class="card-main-text"> Всі завдання </span>
+          </button>
+          <button class="filter-button" data-filter="pending">
+            <i class="fas fa-clock card-main-text"></i> <span class="card-main-text"> Очікують виконання </span>
+          </button>
+          <button class="filter-button" data-filter="review">
+            <i class="fas fa-search card-main-text"></i> <span class="card-main-text"> На перевірці </span>
+          </button>
+          <button class="filter-button" data-filter="completed">
+            <i class="fas fa-check-circle card-main-text"></i> <span class="card-main-text"> Виконані </span>
+          </button>
+          <button class="filter-button" data-filter="overdue">
+            <i class="fas fa-exclamation-triangle card-main-text"></i> <span class="card-main-text"> Протерміновані </span>
+          </button>
+        </div>
+        
+        <div class="advanced-filters card-main-text">
+          <select class="filter-select" id="groupFilter">
+            <option class="card-main-text" value="">Всі групи</option>
+            <option class="card-main-text" value="AC-221">AC-221</option>
+            <option class="card-main-text"value="AC-222">AC-222</option>
+            <option class="card-main-text" value="AC-223">AC-223</option>
+            <option class="card-main-text" value="AC-224">AC-224</option>
+          </select>
+          
+          <select class="filter-select card-main-text" id="typeFilter">
+            <option class="card-main-text" value="">Всі типи</option>
+            <option class="card-main-text" value="theory">Теоретичні</option>
+            <option class="card-main-text" value="practice">Практичні</option>
+            <option class="card-main-text" value="report">Звіти</option>
+          </select>
+          
+          <select class="filter-select card-main-text" id="sortFilter">
+            <option class="card-main-text" value="deadline-asc">Дедлайн (найближчі)</option>
+            <option class="card-main-text" value="deadline-desc">Дедлайн (віддалені)</option>
+            <option class="card-main-text" value="name-asc">Назва (А-Я)</option>
+            <option class="card-main-text" value="name-desc">Назва (Я-А)</option>
+            <option class="card-main-text" value="date-asc">Дата створення (нові)</option>
+            <option class="card-main-text" value="date-desc">Дата створення (старі)</option>
+          </select>
+        </div>
+
+        <div class="task-management">
+          <div class="task-management-content">
+
+            <!-- Awaiting Execution Section -->
+            <div class="task-section" id="pendingTasks">
+              <div class="section-header">
+                <h2 class="large-card-text"><i class="fas fa-clock card-title"></i> Очікують виконання</h2>
+                <span class="task-count large-card-text">?</span>
+              </div>
+              
+              <div class="task-grid">
+                
+              </div>
+            </div>
+
+            <div class="task-section" id="reviewTasks">
+              <div class="section-header">
+                <h2 class="large-card-text"><i class="fas fa-search card-title"></i> На перевірці</h2>
+                <span class="task-count large-card-text">?</span>
+              </div>
+              
+              <div class="task-grid">
+                
+              </div>
+            </div>
+
+            <div class="task-section" id="completedTasks">
+              <div class="section-header">
+                <h2 class="large-card-text"><i class="fas fa-check-circle card-title"></i> Виконані</h2>
+                <span class="task-count large-card-text">?</span>
+              </div>
+              
+              <div class="task-grid">
+                
+              </div>
+            </div>
+
+            <div class="task-section" id="overdueTasks">
+              <div class="section-header">
+                <h2 class="large-card-text">
+                  <i class="fas fa-exclamation-triangle card-title"></i> Протерміновані
+                </h2>
+                <span class="task-count large-card-text">?</span>
+              </div>
+              <div class="task-grid"></div>
+            </div>
+          
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+  
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    
+  </div>
+
+</body>
+</html>
