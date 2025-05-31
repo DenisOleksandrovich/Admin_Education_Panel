@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Створення повідомлення</title>
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="style/notification_create_style.css">
+</head>
+
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/notification_create_back.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+  
+    <!-- Бічна панель навігації -->
+    <div class="sidebar" id="sidebar">
+      
+    </div>
+
+    <!-- Основний вміст -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title header-text">Створення повідомлень</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Вміст форми створення повідомлення -->
+      <div class="container">
+        <div class="notification-form-container card">
+          <h1 class="card-title">Створити повідомлення</h1>
+          
+          <div id="notification-alert" class="notification-alert hidden">
+            <p id="notification-message"></p>
+          </div>
+          
+          <form id="notification-form" class="notification-form">
+            <div class="form-grid">
+              <!-- Ліва колонка -->
+              <div class="form-column">
+                <!-- Тип повідомлення -->
+                <div class="form-group">
+                  <label for="type" class="form-label large-card-text">Тип повідомлення</label>
+                  <select id="type" name="type" class="form-control card-main-text" required>
+                    <option class="card-main-text" value="message">Повідомлення</option>
+                    <option class="card-main-text" value="assignment">Завдання</option>
+                    <option class="card-main-text" value="event">Подія</option>
+                    <option class="card-main-text" value="grade">Оцінка</option>
+                    <option class="card-main-text" value="system">Системне</option>
+                  </select>
+                </div>
+
+                <!-- Заголовок -->
+                <div class="form-group">
+                  <label for="title" class="form-label large-card-text">Заголовок</label>
+                  <input type="text" id="title" name="title" class="form-control card-main-text" placeholder="Введіть заголовок повідомлення" required>
+                  <div id="title-error" class="error-message hidden"></div>
+                </div>
+
+                <!-- Кому надіслати -->
+                <div class="form-group">
+                  <label class="form-label large-card-text">Тип одержувача</label>
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="recipientType" value="individual"> 
+                      <span class="card-main-text">Окремий студент</span>
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="recipientType" value="group"> 
+                      <span class="card-main-text">Навчальна група</span>
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="recipientType" value="supervisor"> 
+                      <span class="card-main-text">Куратор</span>
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="recipientType" value="all"> 
+                      <span class="card-main-text">Усім</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Поля одержувача -->
+                <div id="recipient-individual" class="form-group recipient-field">
+                  <label for="user_id" class="form-label main-card-text">ID або ПІБ студента</label>
+                  <input type="text" id="user_id" name="user_id" class="form-control card-main-text" placeholder="Введіть ID або ПІБ студента" required>
+                  <div id="user_id-error" class="error-message hidden"></div>
+                  <!-- Контейнер для інформації про студента -->
+                </div>
+                
+                <div id="recipient-group" class="form-group recipient-field hidden">
+                  <label for="group_id" class="form-label main-card-text">ID або назва групи</label>
+                  <input type="text" id="group_id" name="group_id" class="form-control card-main-text" placeholder="Введіть ID або назву групи">
+                  <div id="group_id-error" class="error-message hidden"></div>
+                  <!-- Контейнер для інформації про групу -->
+                </div>
+                
+                <div id="recipient-supervisor" class="form-group recipient-field hidden">
+                  <label for="supervisor_id" class="form-label main-card-text">ID або ПІБ куратора</label>
+                  <input type="text" id="supervisor_id" name="supervisor_id" class="form-control card-main-text" placeholder="Введіть ID або ПІБ куратора">
+                  <div id="supervisor_id-error" class="error-message hidden"></div>
+                  <!-- Контейнер для інформації про куратора -->
+                </div>
+              </div>
+
+              <!-- Права колонка -->
+              <div class="form-column">
+                <div class="form-group">
+                  <label for="message" class="form-label large-card-text">Текст повідомлення</label>
+                  <textarea id="message" name="message" class="form-control message-textarea card-main-text" placeholder="Введіть текст повідомлення" required></textarea>
+                  <div id="message-error" class="error-message hidden"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" id="submit-button" class="submit-button card-main-text">
+                Створити повідомлення
+              </button>
+            </div>
+          </form>
+
+          <!-- Прев'ю повідомлення -->
+          <div id="preview-section" class="preview-section hidden">
+            <h3 class="preview-title card-title">Попередній перегляд</h3>
+            <div class="preview-card">
+              <div id="preview-type" class="preview-type-badge large-card-text">Повідомлення</div>
+              <h4 id="preview-title" class="preview-card-title l-card-text"></h4>
+              <p id="preview-message" class="preview-card-message card-main-text"></p>
+              <div class="preview-footer card-main-text">Створено: <span id="preview-date" class="card-main-text"></span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div> 
+  </div>
+
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    
+  </div>
+
+  <!-- CSS for error messages and recipient info displays -->
+  <style>
+    .error-message {
+      color: var(--danger-color);
+      font-size: 0.85em;
+      margin-top: 5px;
+    }
+    
+    .invalid {
+      border-color: var(--danger-color) !important;
+    }
+    
+    .recipient-info {
+      margin-top: 10px;
+    }
+    
+    .recipient-card {
+      background-color: var(--secondary-color);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      box-shadow: var(--little-shadow);
+    }
+    
+    .recipient-card h4 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    
+    .recipient-card p {
+      margin: 5px 0;
+    }
+    
+    .recipient-card.error {
+      background-color: rgba(var(--danger-color-rgb), 0.1);
+      border: 1px solid var(--danger-color);
+    }
+    
+    .loading {
+      color: var(--accent-color);
+      font-style: italic;
+    }
+  </style>
+  
+</body>
+</html>

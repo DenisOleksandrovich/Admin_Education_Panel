@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Безпека | Система дипломних робіт</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/safety_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="animation/safety.js"></script>
+<script type="module" src="animation/authUtils.js"></script>
+
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <div class="sidebar" id="sidebar">
+      </div>
+
+
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid header-text">Безпека</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content safety-content">
+
+        <div class="card safety-card">
+          <div class="form-container">
+            <div class="form-header">
+              <div class="form-icon">
+                <i class="fas fa-key"></i>
+              </div>
+              <h2 class="form-title header-text">Зміна пароля</h2>
+            </div>
+
+            <form id="passwordChangeForm" novalidate>
+              <div class="form-group">
+                <label for="currentPassword" class="form-label card-main-text">Поточний пароль</label>
+                <div class="password-container">
+                  <input type="password" id="currentPassword" class="form-input card-main-text" placeholder="Введіть ваш поточний пароль" required autocomplete="current-password">
+                  <button type="button" id="toggleCurrentPassword" class="toggle-password" aria-label="Показати/сховати пароль">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <div class="form-error card-main-text" id="currentPasswordError"></div>
+                <div class="form-extra-links">
+                  <a href="forgot_password.html" class="forgot-password-link card-main-text">Забули пароль?</a>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="newPassword" class="form-label card-main-text">Новий пароль</label>
+                <div class="password-container">
+                  <input type="password" id="newPassword" class="form-input card-main-text" placeholder="Введіть новий пароль" required autocomplete="new-password">
+                  <button type="button" id="toggleNewPassword" class="toggle-password" aria-label="Показати/сховати пароль">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <div class="password-strength">
+                  <div class="password-strength-meter" id="passwordStrengthMeter"></div>
+                </div>
+                <div class="strength-label">
+                  <span class="card-main-text">Слабкий</span>
+                  <span class="card-main-text">Середній</span>
+                  <span class="card-main-text">Надійний</span>
+                </div>
+
+                <div class="password-requirements">
+                  <div class="requirement card-main-text" id="req-length"><i class="fas fa-times-circle"></i> Мінімум 8 символів</div>
+                  <div class="requirement card-main-text" id="req-case"><i class="fas fa-times-circle"></i> Великі та малі літери</div>
+                  <div class="requirement card-main-text" id="req-numbers"><i class="fas fa-times-circle"></i> Цифри</div>
+                  <div class="requirement card-main-text" id="req-special"><i class="fas fa-times-circle"></i> Спеціальні символи</div>
+                </div>
+
+                <div class="form-error card-main-text" id="newPasswordError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword" class="form-label card-main-text">Підтвердіть новий пароль</label>
+                <div class="password-container">
+                  <input type="password" id="confirmPassword" class="form-input card-main-text" placeholder="Введіть пароль ще раз" required autocomplete="new-password">
+                  <button type="button" id="toggleConfirmPassword" class="toggle-password" aria-label="Показати/сховати пароль">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <div class="form-error card-main-text" id="confirmPasswordError"></div>
+              </div>
+
+              <div class="form-buttons">
+                <button type="submit" class="btn btn-primary card-main-text">Змінити пароль</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="card safety-card">
+           <div class="card-header">
+             <h2 class="card-title"><i class="fas fa-shield-alt"></i> Двофакторна аутентифікація (2FA)</h2>
+           </div>
+           <div id="twoFactorAuthSection">
+                <p class="card-main-text">Підвищте безпеку свого облікового запису, увімкнувши двофакторну аутентифікацію.</p>
+                <div id="2fa-status" class="card-main-text">Статус: <span class="status-text">Не налаштовано</span></div>
+                <button id="setup2faButton" class="btn btn-secondary card-main-text" style="margin-top: 1rem;">Налаштувати 2FA</button>
+                <div id="2fa-setup-instructions" style="display: none; margin-top: 1rem;">
+                    <p class="card-main-text">Відскануйте QR-код за допомогою програми-аутентифікатора (наприклад, Google Authenticator):</p>
+                    <div id="qrCodeContainer" style="margin: 1rem 0;"></div>
+                    <p class="card-main-text">Або введіть цей секретний ключ вручну:</p>
+                    <p><code id="secretKeyContainer" class="card-main-text" style="background: var(--secondary-bg-color); padding: 5px; border-radius: 4px;"></code></p>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="verificationCode" class="form-label card-main-text">Код підтвердження</label>
+                        <input type="text" id="verificationCode" class="form-input card-main-text" placeholder="Введіть 6-значний код" maxlength="6" pattern="\d{6}">
+                        <div class="form-error card-main-text" id="verificationCodeError"></div>
+                    </div>
+                    <button id="verify2faButton" class="btn btn-primary card-main-text">Увімкнути 2FA</button>
+                    <button id="cancel2faButton" class="btn btn-secondary card-main-text">Скасувати</button>
+                </div>
+                 <button id="disable2faButton" class="btn btn-danger card-main-text" style="display: none; margin-top: 1rem;">Вимкнути 2FA</button>
+           </div>
+        </div>
+
+        <div class="card safety-card">
+           <div class="card-header">
+             <h2 class="card-title"><i class="fas fa-user-lock"></i> Заблоковані сесії</h2>
+           </div>
+           <div id="blockedSessions">
+             <p class="card-main-text">Завантаження заблокованих сесій...</p>
+           </div>
+        </div>
+
+        <div class="card safety-card">
+           <div class="card-header">
+             <h2 class="card-title"><i class="fas fa-history"></i> Історія безпеки</h2>
+           </div>
+           <div id="securityActivity">
+             <p class="card-main-text">Завантаження...</p>
+             </div>
+           <a href="#" class="card-action" style="margin-top: 1rem;">Переглянути повну історію</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

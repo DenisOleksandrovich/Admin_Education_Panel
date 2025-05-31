@@ -1,0 +1,120 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Викладачі | Система дипломних робіт</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="style/teachers_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+</head>
+
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="animation/teachers_animation.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <!-- Навігаційний бар -->
+    <div class="sidebar" id="sidebar">
+      
+    </div>
+
+
+    <!-- Головний контент -->
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title fluid header-text">Список викладачів</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="search-container">
+          <input type="text" placeholder="Пошук викладачів за ім'ям, кафедрою або спеціалізацією..." class="search-input card-main-text">
+        </div>
+        
+        <div class="filter-container">
+          
+        </div>
+
+        <div class="teachers-grid">
+          <div class="teacher-card">
+            <div class="teacher-header">
+              <div class="teacher-avatar-large l-card-text">?</div>
+              <div class="teacher-details">
+                <h3 class="teacher-name-large l-card-text">?</h3>
+                <span class="status-badge status-active card-main-text">?</span>
+              </div>
+            </div>
+            <div class="teacher-meta">
+              <div class="meta-item">
+                <span class="meta-label l-card-text">Посада</span>
+                <span class="meta-value card-main-text">?</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label l-card-text">Кафедра</span>
+                <span class="meta-value card-main-text">?</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label l-card-text">Студентів</span>
+                <span class="meta-value card-main-text">?</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label l-card-text">Спеціалізація</span>
+                <span class="meta-value card-main-text">?</span>
+              </div>
+            </div>
+            <div class="teacher-actions">
+              <div class="action-button">
+                <i class="fa fa-eye" class="card-main-text"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-user-plus" class="card-main-text"></i>
+              </div>
+              <div class="action-button">
+                <i class="fa fa-comment" class="card-main-text"></i>
+              </div>
+            </div>
+          </div>
+        </div>  
+
+        <div class="pagination">
+          <div class="page-button disabled">
+            <i class="fa fa-chevron-left" class="card-main-text"></i>
+          </div>
+          <div class="page-button active card-main-text">1</div>
+          <div class="page-button card-main-text">2</div>
+          <div class="page-button card-main-text">3</div>
+          <div class="page-button">
+            <i class="fa fa-chevron-right" class="card-main-text"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Чат-вікно -->
+  <div class="chat-container" id="chatContainer">
+    
+  </div>
+
+</body>
+</html>

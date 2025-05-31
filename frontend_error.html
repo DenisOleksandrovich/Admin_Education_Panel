@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помилка</title>
+    <link rel="stylesheet" href="/style/index_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: 'Geist', 'SF Pro Text', 'SF Pro Icons', 'AOS Icons',
+                         'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-switcher-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .theme-toggle-button {
+            background-color: var(--color-card, #fff);
+            color: var(--color-text, #000);
+            border: 1px solid var(--color-border, #ccc);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem; /* Розмір іконки */
+            box-shadow: var(--little-blue-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-button:hover {
+            background-color: var(--color-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--blue-shadow);
+        }
+
+        .error-page-wrapper {
+            background-color: var(--color-card);
+            padding: clamp(20px, 5vw, 50px);
+            border-radius: var(--card-radius, 12px);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .error-icon {
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--color-danger); /* Основний колір для іконки помилки */
+            margin-bottom: 20px;
+        }
+        .error-icon.not-found { color: var(--color-warning); }
+        .error-icon.forbidden { color: var(--color-danger); }
+        .error-icon.unauthorized { color: var(--color-info); }
+        .error-icon.bad-request { color: var(--color-secondary); }
+
+
+        .error-page-code {
+            font-size: clamp(2.5rem, 15vw, 8rem);
+            font-weight: bold;
+            color: var(--color-text); /* Трохи менш агресивний колір для коду */
+            margin-bottom: 0px;
+            line-height: 1.1;
+        }
+
+        .error-page-title {
+            font-size: clamp(1.5rem, 7vw, 2.8rem);
+            color: var(--color-text);
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .error-page-message {
+            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+            color: var(--color-text-light);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .error-page-actions {
+            display: flex;
+            flex-direction: column; /* Кнопки одна під одною на малих екранах */
+            gap: 15px;
+            width: 100%;
+            max-width: 350px; /* Обмеження ширини кнопок */
+        }
+
+        .error-page-button {
+            display: inline-flex; /* Для вирівнювання іконки та тексту */
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: var(--card-radius, 8px);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .error-page-button.primary {
+            background-color: var(--color-primary);
+            color: var(--button-text, white);
+            box-shadow: var(--little-blue-shadow);
+        }
+        .error-page-button.primary:hover {
+            background-color: var(--color-primary-light);
+            transform: scale(1.02);
+            box-shadow: var(--blue-shadow);
+        }
+
+        .error-page-button.secondary {
+            background-color: var(--secondary-bg-color); /* Використовуємо змінну для вторинного фону */
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+        .error-page-button.secondary:hover {
+            background-color: var(--color-hover);
+            transform: scale(1.02);
+        }
+
+        @media (min-width: 480px) {
+            .error-page-actions {
+                flex-direction: row; /* Кнопки в ряд на більших екранах */
+                justify-content: center;
+            }
+            .error-page-button {
+                min-width: 150px;
+            }
+        }
+
+    </style>
+</head>
+<body data-theme="light"> 
+
+    <div class="theme-switcher-container">
+        <button id="themeToggleBtn" class="theme-toggle-button" title="Змінити тему">
+            <i class="fas fa-moon"></i>
+            {/* <i class="fas fa-sun" style="display:none;"></i> */}
+        </button>
+    </div>
+
+    <div class="error-page-wrapper">
+        <div id="errorIcon" class="error-icon">
+            <i class="fas fa-exclamation-triangle"></i> </div>
+        <div id="errorCode" class="error-page-code"></div>
+        <h1 id="errorTitle" class="error-page-title card-title"></h1>
+        <p id="errorMessage" class="error-page-message card-main-text"></p>
+        <div class="error-page-actions">
+            <button id="goBackButton" class="error-page-button secondary menu-nav-text">
+                <i class="fas fa-arrow-left"></i> Повернутися назад
+            </button>
+            <a href="/home.html" class="error-page-button primary menu-nav-text">
+                <i class="fas fa-home"></i> На Головну
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const status = params.get('status') || '404'; 
+            const message = decodeURIComponent(params.get('message') || 'Щось не так сталося на цьому сайті.');
+            let title = 'Ой, халепа!';
+            let iconClass = 'fas fa-exclamation-triangle'; // Default
+            let iconWrapperClass = 'error-icon'; // Default
+
+            const errorCodeElem = document.getElementById('errorCode');
+            const errorTitleElem = document.getElementById('errorTitle');
+            const errorMessageElem = document.getElementById('errorMessage');
+            const errorIconElem = document.getElementById('errorIcon');
+
+            if (errorCodeElem) errorCodeElem.textContent = status;
+            if (errorMessageElem) errorMessageElem.textContent = message;
+
+            if (status.startsWith('4')) {
+                switch (status) {
+                    case '400': 
+                        title = 'Некоректний Запит'; 
+                        iconClass = 'fas fa-sliders-h'; // Icon for bad configuration/request
+                        iconWrapperClass = 'error-icon bad-request';
+                        break;
+                    case '401': 
+                        title = 'Неавторизовано'; 
+                        iconClass = 'fas fa-user-lock'; 
+                        iconWrapperClass = 'error-icon unauthorized';
+                        break;
+                    case '403': 
+                        title = 'Доступ Заборонено'; 
+                        iconClass = 'fas fa-hand-paper'; // Or fa-ban
+                        iconWrapperClass = 'error-icon forbidden';
+                        break;
+                    case '404': 
+                        title = 'Сторінку Не Знайдено'; 
+                        iconClass = 'fas fa-map-signs'; // Or fa-search-location
+                        iconWrapperClass = 'error-icon not-found';
+                        break;
+                    default: 
+                        title = `Помилка Клієнта (${status})`;
+                        iconClass = 'fas fa-question-circle';
+                        iconWrapperClass = 'error-icon bad-request';
+                }
+            } else if (status.startsWith('5')) { 
+                 title = `Внутрішня Помилка Сайту (${status})`;
+                 iconClass = 'fas fa-server'; // Icon for server error
+            }
+            if (errorTitleElem) errorTitleElem.textContent = title;
+            if (errorIconElem) {
+                errorIconElem.innerHTML = `<i class="${iconClass}"></i>`;
+                errorIconElem.className = iconWrapperClass; // Update class for color
+            }
+
+            // Кнопка "Повернутися назад"
+            const goBackButton = document.getElementById('goBackButton');
+            if (goBackButton) {
+                goBackButton.addEventListener('click', () => {
+                    if (document.referrer && document.referrer !== window.location.href) {
+                        window.history.back();
+                    } else {
+                        // Якщо немає куди повертатися, або повернулися на цю ж сторінку,
+                        // перенаправляємо на головну
+                        window.location.href = '/home.html';
+                    }
+                });
+            }
+
+            // Логіка перемикання тем
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const body = document.body;
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            body.setAttribute('data-theme', currentTheme);
+            
+            const moonIcon = '<i class="fas fa-moon"></i>';
+            const sunIcon = '<i class="fas fa-sun"></i>';
+
+            if (currentTheme === 'dark') {
+                themeToggleBtn.innerHTML = sunIcon;
+            } else {
+                themeToggleBtn.innerHTML = moonIcon;
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', () => {
+                    let newTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                    body.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    if (newTheme === 'dark') {
+                        themeToggleBtn.innerHTML = sunIcon;
+                    } else {
+                        themeToggleBtn.innerHTML = moonIcon;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Система дипломних робіт</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style/index_style.css">
+    <link rel="stylesheet" href="style/accounting_admin_panel_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body data-theme="light">
+
+    <div class="admin-container">
+        <div id="sidebar" class="sidebar">
+            Завантаження навігації...
+        </div>
+
+        <div class="main-content">
+            <header class="main-header">
+                <div>
+                     <button id="sidebar-toggle" class="sidebar-toggle">
+                         <i class="fas fa-bars header-text"></i>
+                     </button>
+                    <h1 class="main-title fluid header-text">Панель Адміністратора</h1>
+                </div>
+                <div class="header-actions">
+                     <a href="notification.html">
+                        <button class="notification-bell" aria-label="Сповіщення">
+                            <i class="fas fa-bell header-text"></i>
+                            <span class="notification-badge card-main-text" style="display: none;">*</span>
+                        </button>
+                     </a>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Змінити тему">
+                        <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+                        <i class="fa-solid fa-sun header-text" id="light-icon" style="display: none;"></i>
+                    </button>
+                    </div>
+            </header>
+
+            <main class="admin-content page-content">
+
+                <div class="tab-buttons">
+                    <button class="tab-button active card-large-text" data-tab="manage-students">Керування Студентами</button>
+                    <button class="tab-button card-large-text" data-tab="create-student">Створити Студента</button>
+                    <button class="tab-button card-large-text" data-tab="manage-teachers">Керування Викладачами</button>
+                    <button class="tab-button card-large-text" data-tab="create-teacher">Створити Викладача</button>
+                    <button class="tab-button card-large-text" data-tab="manage-admins">Керування Адмінами</button>
+                    <button class="tab-button card-large-text" data-tab="create-admin">Створити Адміна</button>
+                </div>
+
+                <div class="tabs-container card">
+
+                    <div class="tab-content-area">
+                        <div id="manage-students" class="tab-content active">
+                            <h2 class="content-title card-title">Список Студентів</h2>
+                            <div class="actions-bar">
+                                 <input type="text" id="student-search" placeholder="Пошук студента (ПІБ, Email, № квитка)..." class="search-input card-main-text">
+                                 <button id="refresh-students" class="simple-button card-main-text"><i class="fas fa-sync-alt" class="ref card-main-text"></i> <span class="ref card-main-text">Оновити</span></button>
+                            </div>
+                            <div class="table-container">
+                                <table id="students-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="l-card-text">ID</th>
+                                            <th class="l-card-text">ПІБ</th>
+                                            <th class="l-card-text">Email</th>
+                                            <th class="l-card-text">Група</th>
+                                            <th class="l-card-text">Статус</th>
+                                            <th class="l-card-text">Дії</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="6" class="card-main-text">Завантаження студентів...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                             <div class="pagination-controls" id="student-pagination"></div>
+                        </div>
+
+                        <div id="create-student" class="tab-content">
+                            <h2 class="content-title card-title">Створити Обліковий Запис Студента</h2>
+                            <form id="createStudentForm" class="admin-form">
+                                <div class="form-group">
+                                  <label for="create-fullName" class="l-card-text">Повне ім'я</label>
+                                  <input type="text" id="create-fullName" name="fullName" required class="card-main-text" placeholder="Петренко Петро Петрович">
+                                  <span class="error-message card-main-text" id="create-fullName-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                  <label for="create-email" class="l-card-text">Email</label>
+                                  <input type="email" id="create-email" name="email" required class="card-main-text" placeholder="student@example.com">
+                                   <span class="error-message card-main-text" id="create-email-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                  <label for="create-phone" class="l-card-text">Телефон</label>
+                                  <input type="tel" id="create-phone" name="phoneNumber" required class="card-main-text" placeholder="+380991234567">
+                                   <span class="error-message card-main-text" id="create-phone-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                  <label for="create-studentCard" class="l-card-text">Номер студ. квитка</label>
+                                  <input type="text" id="create-studentCard" name="studentCardNumber" required class="card-main-text" placeholder="КВ12345678">
+                                   <span class="error-message card-main-text" id="create-studentCard-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                  <label for="create-department" class="l-card-text">Кафедра</label>
+                                  <input type="text" id="create-department" name="department" required class="card-main-text" placeholder="Кафедра комп'ютерних наук">
+                                   <span class="error-message card-main-text" id="create-department-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                  <label for="create-studyGroup" class="l-card-text">Навчальна група</label>
+                                   <select id="create-studyGroup" name="studyGroupId" required class="card-main-text">
+                                        <option class="card-main-text" value="" disabled selected>Виберіть групу...</option>
+                                   </select>
+                                    <span class="error-message card-main-text" id="create-studyGroup-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                  <label for="create-supervisor" class="l-card-text">Науковий керівник</label>
+                                   <select id="create-supervisor" name="supervisorId" required class="card-main-text">
+                                        <option class="card-main-text" value="" disabled selected>Виберіть керівника...</option>
+                                   </select>
+                                   <span class="error-message card-main-text" id="create-supervisor-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-password-student" class="l-card-text">Пароль (мін. 8 символів)</label>
+                                    <input type="password" id="create-password-student" name="password" required class="card-main-text" placeholder="Мінімум 8 символів">
+                                    <span class="error-message card-main-text" id="create-password-student-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-confirm-password-student" class="l-card-text">Підтвердіть Пароль</label>
+                                    <input type="password" id="create-confirm-password-student" name="confirmPasswordStudent" required class="card-main-text" placeholder="Повторіть пароль">
+                                    <span class="error-message card-main-text" id="create-confirm-password-student-error"></span>
+                                </div>
+                                <button type="submit" class="submit-button card-main-text">Створити Студента</button>
+                                 <div class="form-message card-main-text" id="createStudentMessage"></div>
+                            </form>
+                        </div>
+
+                        <div id="manage-teachers" class="tab-content">
+                            <h2 class="content-title card-title">Список Викладачів (Керівників)</h2>
+                             <div class="actions-bar">
+                                 <input type="text" id="teacher-search" placeholder="Пошук викладача (ПІБ, Email, Кафедра)..." class="search-input card-main-text">
+                                 <button id="refresh-teachers" class="simple-button card-main-text"><i class="fas fa-sync-alt" class="ref card-main-text"></i> <span class="ref card-main-text">Оновити</span></button>
+                            </div>
+                            <div class="table-container">
+                                <table id="teachers-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="l-card-text">ID</th>
+                                            <th class="l-card-text">ПІБ</th>
+                                            <th class="l-card-text">Email</th>
+                                            <th class="l-card-text">Кафедра</th>
+                                            <th class="l-card-text">Посада</th>
+                                            <th class="l-card-text">Статус</th>
+                                            <th class="l-card-text">Дії</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="7" class="card-main-text">Завантаження викладачів...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                             <div class="pagination-controls" id="teacher-pagination"></div>
+                        </div>
+
+                        <div id="create-teacher" class="tab-content">
+                            <h2 class="content-title card-title">Створити Обліковий Запис Викладача</h2>
+                            <form id="createTeacherForm" class="admin-form">
+                                <div class="form-group">
+                                    <label for="create-teacher-fullName" class="l-card-text">Повне ім'я</label>
+                                    <input type="text" id="create-teacher-fullName" name="fullName" required class="card-main-text" placeholder="Іваненко Іван Іванович">
+                                     <span class="error-message card-main-text" id="create-teacher-fullName-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-teacher-email" class="l-card-text">Email</label>
+                                    <input type="email" id="create-teacher-email" name="email" required class="card-main-text" placeholder="teacher@example.com">
+                                     <span class="error-message card-main-text" id="create-teacher-email-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-teacher-phone" class="l-card-text">Телефон</label>
+                                    <input type="tel" id="create-teacher-phone" name="phone" required class="card-main-text" placeholder="+380671234567">
+                                     <span class="error-message card-main-text" id="create-teacher-phone-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-teacher-department" class="l-card-text">Кафедра/Відділ</label>
+                                    <input type="text" id="create-teacher-department" name="department" required class="card-main-text" placeholder="Кафедра інженерії програмного забезпечення">
+                                     <span class="error-message card-main-text" id="create-teacher-department-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-teacher-position" class="l-card-text">Посада</label>
+                                    <input type="text" id="create-teacher-position" name="position" class="card-main-text" placeholder="напр., Доцент">
+                                    <span class="error-message card-main-text" id="create-teacher-position-error"></span>
+                                </div>
+                                <div class="form-group">
+                                     <label for="create-teacher-status" class="l-card-text">Статус викладача</label>
+                                    <input type="text" id="create-teacher-status" name="teacher_status" class="card-main-text" placeholder="напр., Доступний для керівництва">
+                                     <span class="error-message card-main-text" id="create-teacher-status-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                     <label for="create-teacher-specialization" class="l-card-text">Спеціалізація</label>
+                                    <input type="text" id="create-teacher-specialization" name="specialization" class="card-main-text" placeholder="напр., Штучний інтелект, Веб-технології">
+                                     <span class="error-message card-main-text" id="create-teacher-specialization-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-password-teacher" class="l-card-text">Пароль (мін. 8 символів)</label>
+                                    <input type="password" id="create-password-teacher" name="password" required class="card-main-text" placeholder="Мінімум 8 символів">
+                                    <span class="error-message card-main-text" id="create-password-teacher-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-confirm-password-teacher" class="l-card-text">Підтвердіть Пароль</label>
+                                    <input type="password" id="create-confirm-password-teacher" name="confirmPasswordTeacher" required class="card-main-text" placeholder="Повторіть пароль">
+                                    <span class="error-message card-main-text" id="create-confirm-password-teacher-error"></span>
+                                </div>
+                                <button type="submit" class="submit-button card-main-text">Створити Викладача</button>
+                                <div class="form-message card-main-text" id="createTeacherMessage"></div>
+                            </form>
+                        </div>
+
+                         <div id="manage-admins" class="tab-content">
+                            <h2 class="content-title card-title">Список Адміністраторів</h2>
+                            <div class="actions-bar">
+                                <input type="text" id="admin-search" placeholder="Пошук адміна (Email)..." class="search-input card-main-text">
+                                <button id="refresh-admins" class="simple-button card-main-text"><i class="fas fa-sync-alt" class="ref card-main-text"></i> <span class="ref card-main-text">Оновити</span></button>
+                            </div>
+                            <div class="table-container">
+                                <table id="admins-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="l-card-text">ID</th>
+                                            <th class="l-card-text">Email</th>
+                                            <th class="l-card-text">Дата створення</th>
+                                            <th class="l-card-text">Останній вхід</th>
+                                            <th class="l-card-text">Статус</th>
+                                            <th class="l-card-text">Дії</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="6" class="card-main-text">Завантаження адміністраторів...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                             <div class="pagination-controls" id="admin-pagination"></div>
+                        </div>
+
+                        <div id="create-admin" class="tab-content">
+                            <h2 class="content-title card-title">Створити Обліковий Запис Адміністратора</h2>
+                             <p class="card-main-text info-text">! Створення адміністратора створить лише запис акаунта з роллю 'admin'.</p>
+                            <form id="createAdminForm" class="admin-form">
+                                 <div class="form-group">
+                                    <label for="create-admin-email" class="l-card-text">Email</label>
+                                    <input type="email" id="create-admin-email" name="email" required class="card-main-text" placeholder="admin@example.com">
+                                    <span class="error-message card-main-text" id="create-admin-email-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-password-admin" class="l-card-text">Пароль (мін. 8 символів)</label>
+                                    <input type="password" id="create-password-admin" name="password" required class="card-main-text" placeholder="Мінімум 8 символів">
+                                    <span class="error-message card-main-text" id="create-password-admin-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-confirm-password-admin" class="l-card-text">Підтвердіть Пароль</label>
+                                    <input type="password" id="create-confirm-password-admin" name="confirmPasswordAdmin" required class="card-main-text" placeholder="Повторіть пароль">
+                                    <span class="error-message card-main-text" id="create-confirm-password-admin-error"></span>
+                                </div>
+                                 <div class="form-group">
+                                  <label for="link-supervisor" class="l-card-text">Прив'язати до викладача (Optional)</label>
+                                   <select id="link-supervisor" name="supervisorId" class="card-main-text">
+                                        <option class="card-main-text" value="" selected>Не прив'язувати</option>
+                                   </select>
+                                   <span class="error-message card-main-text" id="link-supervisor-error"></span>
+                                   <p class="card-main-text info-text small-text">! Якщо вибрано, цей акаунт буде асоційовано з профілем викладача.</p>
+                                </div>
+                                <button type="submit" class="submit-button card-main-text">Створити Адміна</button>
+                                <div class="form-message card-main-text" id="createAdminMessage"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+             <div id="editModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button" title="Закрити">&times;</span>
+                    <h3 id="modalTitle" class="card-title">Редагувати Користувача</h3>
+                    <form id="editForm">
+                        <input type="hidden" id="edit-accountId" name="accountId">
+                        <input type="hidden" id="edit-userType" name="userType">
+
+                         <div class="form-group">
+                            <label for="edit-email" class="l-card-text">Email</label>
+                            <input type="email" id="edit-email" name="edit-email" required class="card-main-text" placeholder="user@example.com">
+                            <span class="error-message card-main-text" id="edit-email-error"></span>
+                         </div>
+
+                         <div class="form-group" id="edit-profile-fields">
+                              <label for="edit-fullName" class="l-card-text">Повне ім'я</label>
+                              <input type="text" id="edit-fullName" name="edit-fullName" required class="card-main-text" placeholder="Повне ім'я користувача">
+                              <span class="error-message card-main-text" id="edit-fullName-error"></span>
+                         </div>
+
+                         <div class="form-group user-type-specific" id="edit-student-fields" style="display: none;">
+                             <label for="edit-studentcardnumber" class="l-card-text">Номер студ. квитка</label>
+                             <input type="text" id="edit-studentcardnumber" name="edit-studentcardnumber" class="card-main-text" placeholder="КВ09876543">
+                             <span class="error-message card-main-text" id="edit-studentcardnumber-error"></span>
+
+                             <label for="edit-department-student" class="l-card-text">Кафедра</label>
+                             <input type="text" id="edit-department-student" name="edit-department" class="card-main-text" placeholder="Кафедра студента">
+                             <span class="error-message card-main-text" id="edit-department-student-error"></span>
+
+                              <label for="edit-phone-student" class="l-card-text">Телефон</label>
+                              <input type="tel" id="edit-phone-student" name="edit-phone" class="card-main-text" placeholder="+380951234567">
+                              <span class="error-message card-main-text" id="edit-phone-student-error"></span>
+
+                             <label for="edit-studygroupid" class="l-card-text">Навчальна група</label>
+                             <select id="edit-studygroupid" name="edit-studygroupid" class="card-main-text"></select>
+                              <span class="error-message card-main-text" id="edit-studygroupid-error"></span>
+
+                              <label for="edit-supervisorid-student" class="l-card-text">Науковий керівник</label>
+                              <select id="edit-supervisorid-student" name="edit-supervisorid" class="card-main-text"></select>
+                              <span class="error-message card-main-text" id="edit-supervisorid-student-error"></span>
+                         </div>
+
+                         <div class="form-group user-type-specific" id="edit-teacher-fields" style="display: none;">
+                              <label for="edit-department-teacher" class="l-card-text">Кафедра/Відділ</label>
+                              <input type="text" id="edit-department-teacher" name="edit-department" class="card-main-text" placeholder="Кафедра викладача/адміна">
+                              <span class="error-message card-main-text" id="edit-department-teacher-error"></span>
+
+                              <label for="edit-phone-teacher" class="l-card-text">Телефон</label>
+                              <input type="tel" id="edit-phone-teacher" name="edit-phone" class="card-main-text" placeholder="+380501234567">
+                              <span class="error-message card-main-text" id="edit-phone-teacher-error"></span>
+
+                              <label for="edit-position" class="l-card-text">Посада</label>
+                              <input type="text" id="edit-position" name="edit-position" class="card-main-text" placeholder="Посада, напр., Професор">
+                              <span class="error-message card-main-text" id="edit-position-error"></span>
+
+                              <label for="edit-teacherstatus" class="l-card-text">Статус викладача</label>
+                              <input type="text" id="edit-teacherstatus" name="edit-teacherstatus" class="card-main-text" placeholder="Статус, напр., У відпустці">
+                              <span class="error-message card-main-text" id="edit-teacherstatus-error"></span>
+
+                              <label for="edit-specialization" class="l-card-text">Спеціалізація</label>
+                              <input type="text" id="edit-specialization" name="edit-specialization" class="card-main-text" placeholder="Спеціалізація, напр., Бази даних">
+                               <span class="error-message card-main-text" id="edit-specialization-error"></span>
+                         </div>
+
+                         <div class="form-group user-type-specific" id="edit-admin-fields" style="display: none;">
+                             <label for="edit-supervisorid-admin" class="l-card-text">Прив'язаний викладач (ID)</label>
+                             <select id="edit-supervisorid-admin" name="edit-supervisorid" class="card-main-text"></select>
+                              <span class="error-message card-main-text" id="edit-supervisorid-admin-error"></span>
+                              <p class="card-main-text info-text small-text">! Зміна прив'язки може вплинути на доступ.</p>
+                         </div>
+
+                         <hr>
+
+                        <div class="form-group">
+                            <label for="edit-status" class="l-card-text">Статус акаунту</label>
+                            <select id="edit-status" name="edit-status" required class="card-main-text">
+                                 <option class="card-main-text" value="1">Активний</option>
+                                 <option class="card-main-text" value="0">Неактивний</option>
+                            </select>
+                            <span class="error-message card-main-text" id="edit-status-error"></span>
+                        </div>
+
+                        <button type="submit" class="submit-button card-main-text">Зберегти Зміни</button>
+                         <div class="form-message card-main-text" id="editFormMessage"></div>
+                    </form>
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+    </div>
+
+    <script type="module" src="animation/index_animation.js"></script>
+    <script type="module" src="animation/nav-bar.js"></script>
+    <script type="module" src="animation/accounting_admin_panel_animation.js"></script>
+
+</body>
+</html>

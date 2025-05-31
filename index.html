@@ -1,0 +1,138 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адміністративна панель | Система дипломнх робіт</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style/index_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="animation/main_page.js"></script>
+
+<body data-theme="light">
+  <div class="admin-container">
+
+    <div class="sidebar" id="sidebar">
+
+    </div>
+
+    <div class="main-content" id="main-content">
+      <header class="main-header">
+        <div>
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="main-title header-text">Загальний огляд</h1>
+        </div>
+        <div class="header-actions">
+          <a href="notification.html">
+            <button class="notification-bell">
+              <i class="fas fa-bell header-text"></i>
+              <span class="notification-badge card-main-text">*</span>
+            </button>
+          </a>
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+            <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title card-large-text">Всього студентів</h3>
+              <div class="stat-icon card-main-text">👨‍🎓</div>
+            </div>
+            <p class="stat-value card-main-text" id="stat-students-value">-</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title card-large-text">Всього викладачів</h3>
+              <div class="stat-icon card-main-text">👩‍🏫</div>
+            </div>
+            <p class="stat-value card-main-text" id="stat-supervisors-value">-</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title card-large-text">Виконано робіт</h3>
+              <div class="stat-icon card-main-text">✔️</div>
+            </div>
+            <p class="stat-value card-main-text" id="stat-completed-submissions-value">-</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <h3 class="stat-title card-large-text">Дипломних завдань</h3>
+              <div class="stat-icon card-main-text">📜</div>
+            </div>
+            <p class="stat-value card-main-text" id="stat-diplomas-value">-</p>
+          </div>
+        </div>
+
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title" id="assignments-submissions-title">Завдання / Завантаження</h2>
+              <a href="tasks.html" class="card-action">Показати всі</a>
+            </div>
+            <ul class="task-list" id="latest-submissions-list">
+               <li class="task-item placeholder-item">
+                 <p class="card-main-text">Завантаження...</p>
+               </li>
+            </ul>
+          </div>
+
+
+          <div>
+            <div class="card" id="miniCalendarCard" style="margin-bottom: 1.5rem; cursor: pointer;" title="Перейти до календаря">
+              <div class="card-header">
+                <h2 class="card-title" id="miniCalendarTitle">Календар</h2> 
+              </div>
+              <table class="calendar">
+                <thead>
+                  <tr>
+                    <th class="card-large-text">Пн</th>
+                    <th class="card-large-text">Вт</th>
+                    <th class="card-large-text">Ср</th>
+                    <th class="card-large-text">Чт</th>
+                    <th class="card-large-text">Пт</th>
+                    <th class="card-large-text">Сб</th>
+                    <th class="card-large-text">Нд</th>
+                  </tr>
+                </thead>
+                <tbody id="miniCalendarBody"> 
+                  
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Кращі студенти</h2>
+              </div>
+              <ul class="student-list" id="top-students-list">
+                <li class="student-item placeholder-item">
+                   <p class="card-main-text">Завантаження...</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="chat-container" id="chatContainer">
+
+  </div>
+
+</body>
+</html>

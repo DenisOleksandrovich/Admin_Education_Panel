@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календар Подій</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style/index_style.css">
+    <link rel="stylesheet" href="style/calendar_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<script type="module" src="animation/index_animation.js"></script>
+<script type="module" src="animation/nav-bar.js"></script>
+<script type="module" src="animation/calendar_animation.js"></script> <body data-theme="light">
+<div class="admin-container">
+
+    <div class="sidebar" id="sidebar">
+        </div>
+
+    <div class="main-content" id="main-content">
+        <header class="main-header">
+            <div>
+                <button id="sidebar-toggle" class="sidebar-toggle"><i class="fas fa-bars"></i></button>
+                <h1 class="main-title header-text">Календар Подій</h1>
+            </div>
+            <div class="header-actions">
+                <a href="notification.html">
+                    <button class="notification-bell"><i class="fas fa-bell header-text"></i><span class="notification-badge card-main-text">*</span></button>
+                </a>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+                    <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <div class="calendar-actions">
+                    <div class="calendar-navigation">
+                        <button class="nav-button card-large-text" id="prevButton" title="Попередній період"><</button>
+                        <button class="nav-button card-large-text" id="todayButton" title="Сьогодні"><span id="currentMonthYear" class="card-large-text">Місяць Рік</span></button>
+                        <button class="nav-button card-large-text" id="nextButton" title="Наступний період">></button>
+                    </div>
+                    <div class="view-selector">
+                        <button class="view-button card-large-text" data-view="week">Тиждень</button>
+                        <button class="view-button active card-large-text" data-view="month">Місяць</button>
+                        <button class="view-button card-large-text" data-view="year">Рік</button>
+                    </div>
+                    <div class="filter-wrapper">
+                      <select id="eventTypeFilter" class="filter-select card-main-text">
+                        <option value="">Всі типи</option>
+                      </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" class="search-input card-main-text" placeholder="Пошук...">
+                        <button class="clear-search" id="clearSearchBtn" style="display: none;">&times;</button>
+                    </div>
+                    <div class="filter-container">
+                        <button id="addEventBtn" class="card-main-text" title="Додати нову подію">
+                            <i class="fas fa-plus" class="card-main-text"></i> Додати подію
+                        </button>
+
+                        <button id="searchEventsBtn" class="card-main-text" title="Пошук подій" style="display: none;">
+                            <i class="fas fa-search" class="card-main-text"></i> Пошук
+                        </button>
+                    </div>
+                </div>
+                <div id="emptyResults" class="empty-results" style="display: none;">
+                  <img src="icons/no-result.png" alt="No results found" class="no-results-icon">
+                  <p class="card-title">Нічого не знайдено</p>
+                  <p class="card-main-text">Спробуйте змінити параметри пошуку або фільтри.</p>
+                </div>
+            </div>
+
+            <div class="event-legend">
+              <div class="legend-item"><div class="legend-color event-type-seminar"></div><span class="card-main-text">Семінар</span></div>
+              <div class="legend-item"><div class="legend-color event-type-conference"></div><span class="card-main-text">Конференція</span></div>
+              <div class="legend-item"><div class="legend-color event-type-lecture"></div><span class="card-main-text">Лекція</span></div>
+              <div class="legend-item"><div class="legend-color event-type-practice"></div><span class="card-main-text">Практика</span></div>
+              <div class="legend-item"><div class="legend-color event-type-deadline"></div><span class="card-main-text">Дедлайн</span></div>
+              <div class="legend-item"><div class="legend-color event-type-exhibition"></div><span class="card-main-text">Виставка</span></div>
+              <div class="legend-item"><div class="legend-color event-type-exam"></div><span class="card-main-text">Екзамен</span></div>
+              <div class="legend-item"><div class="legend-color event-type-meeting"></div><span class="card-main-text">Зустріч</span></div>
+              <div class="legend-item"><div class="legend-color event-type-other"></div><span class="card-main-text">Інше</span></div>
+            </div>
+
+            <div class="calendar-view-container" id="viewContainer">
+                <div class="calendar-view month-view" id="monthView">
+                     <div class="calendar-weekdays">
+                        <div class="calendar-day-header card-large-text">Пн</div>
+                        <div class="calendar-day-header card-large-text">Вт</div>
+                        <div class="calendar-day-header card-large-text">Ср</div>
+                        <div class="calendar-day-header card-large-text">Чт</div>
+                        <div class="calendar-day-header card-large-text">Пт</div>
+                        <div class="calendar-day-header card-large-text">Сб</div>
+                        <div class="calendar-day-header card-large-text">Нд</div>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                </div>
+                <div class="calendar-view week-view" id="weekView" style="display: none;">
+                    <div class="week-grid" id="weekGrid"></div>
+                </div>
+                 <div class="calendar-view year-view" id="yearView" style="display: none;">
+                    <div class="year-grid" id="yearGrid"></div>
+                </div>
+            </div>
+
+            <div class="upcoming-events">
+                <div class="upcoming-title card-title">Найближчі події </div>
+                <ul class="upcoming-list" id="upcoming-events-list"></ul>
+                <div id="upcomingEmptyResults" class="empty-results" style="display: none;">
+                    <img src="icons/no-result.png" alt="No results found" class="no-results-icon">
+                    <p class="card-title">Немає майбутніх подій</p>
+                    <p class="card-main-text">За цими критеріями немає найближчих подій.</p>
+                </div>
+            </div>
+
+            <div id="eventModal" class="modal">
+                <div class="modal-content">
+                    <button class="close-btn" id="closeModalBtn" title="Закрити"></button>
+            
+                    <h2 id="modal-event-name" class="modal-title card-title">Назва події</h2>
+            
+                    <div class="modal-details">
+                        <div class="modal-detail-item">
+                            <span class="modal-label card-large-text">📅 Дата:</span>
+                            <span id="modal-event-date" class="modal-value card-main-text"></span>
+                        </div>
+                        <div class="modal-detail-item">
+                             <span class="modal-label card-large-text">📍 Місце:</span>
+                            <span id="modal-event-venue" class="modal-value card-main-text"></span>
+                        </div>
+                         <div class="modal-detail-item">
+                             <span class="modal-label card-large-text">📌 Тип:</span>
+                            <span id="modal-event-type" class="modal-value card-main-text"></span>
+                        </div>
+                        <div class="modal-detail-item">
+                             <span class="modal-label card-large-text">⏱️ Тривалість:</span>
+                            <span class="modal-value card-main-text">
+                                <span id="modal-event-duration"></span> хв
+                            </span>
+                        </div>
+                        <div class="modal-detail-item">
+                             <span class="modal-label card-large-text">👨‍🏫 Викладач:</span>
+                            <span id="modal-event-supervisor" class="modal-value card-main-text"></span>
+                        </div>
+                         <div class="modal-detail-item modal-detail-item-groups">
+                            <span class="modal-label card-large-text">👥 Групи:</span> <span id="modal-event-groups" class="modal-value card-main-text"></span>
+                         </div>
+                        <div class="modal-detail-item modal-detail-item-description">
+                             <span class="modal-label card-large-text">📝 Опис:</span>
+                            <span id="modal-event-description" class="modal-value card-main-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="addEventModal" class="modal">
+              <div class="modal-content">
+                  <button class="close-btn" id="closeAddModalBtn" title="Закрити"></button>
+                  <h2 class="modal-title card-title">✨ Додати нову подію</h2>
+          
+                  <form id="addEventForm" class="modal-form">
+                      <div class="form-group">
+                          <label for="addEventName" class="form-label card-large-text">Назва події:</label>
+                          <input type="text" id="addEventName" name="event_name" placeholder="Введіть назву події" class="form-input card-main-text" required>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="addEventDate" class="form-label card-large-text">Дата та час:</label>
+                          <input type="datetime-local" id="addEventDate" name="event_date" class="form-input card-main-text" required>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="addEventType" class="form-label card-large-text">Тип події:</label>
+                          <select id="addEventType" name="event_type" class="form-select card-main-text" required>
+                              <option value="" disabled selected>Оберіть тип...</option>
+                              </select>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="addEventVenue" class="form-label card-large-text">Місце проведення:</label>
+                          <input type="text" id="addEventVenue" name="venue" placeholder="Введіть місце проведення події" class="form-input card-main-text">
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="addEventDuration" class="form-label card-large-text">Тривалість (хв):</label>
+                          <input type="number" id="addEventDuration" name="duration" class="form-input card-main-text" min="0" step="15" placeholder="наприклад 90 хв">
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="addEventSupervisor" class="form-label card-large-text">Викладач:</label>
+                          <select id="addEventSupervisor" name="supervisor_id" class="form-select card-main-text" required>
+                               <option value="" disabled selected>Оберіть викладача...</option>
+                              </select>
+                      </div>
+          
+                      <div class="form-group form-group-full">
+                          <label for="addEventDescription" class="form-label card-large-text">Опис:</label>
+                          <textarea id="addEventDescription" name="event_description" placeholder="Напишіть короткий опис події" class="form-textarea card-main-text" rows="3"></textarea>
+                      </div>
+          
+                      <div class="form-group form-group-full">
+                          <label class="form-label card-large-text">Групи:</label>
+                          <div id="addEventGroups" class="form-group-checkboxes card-main-text">
+                              <p><i>Завантаження груп...</i></p>
+                          </div>
+                      </div>
+          
+                       <div class="form-actions">
+                          <button type="button" id="cancelAddEventBtn" class="form-button secondary-button card-main-text">Скасувати</button>
+                          <button type="submit" id="submitAddEventBtn" class="form-button primary-button card-main-text">Додати подію</button>
+                      </div>
+                      <div id="addEventError" class="form-error card-main-text" style="display: none;"></div>
+                  </form>
+              </div>
+            </div>
+
+
+
+        </div> </div> </div> <div class="chat-container" id="chatContainer"></div>
+</body>
+</html>

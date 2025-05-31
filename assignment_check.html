@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перевірка Завдання | Система дипломних робіт</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style/index_style.css"> <link rel="stylesheet" href="style/task_style.css">   <link rel="stylesheet" href="style/assignment_check_style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body data-theme="light">
+    <div class="admin-container">
+        <div class="sidebar" id="sidebar">
+            </div>
+
+        <div class="main-content" id="main-content">
+            <header class="main-header">
+                <div>
+                    <button id="sidebar-toggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="main-title fluid header-text" id="pageTitle">Перевірка робіт: <span id="checkPageAssignmentTitle"></span></h1>
+                </div>
+                <div class="header-actions">
+                    <a href="notification.html">
+                        <button class="notification-bell">
+                            <i class="fas fa-bell header-text"></i>
+                            <span class="notification-badge card-main-text" style="display:none;">*</span>
+                        </button>
+                    </a>
+                    <button id="theme-toggle" class="theme-toggle">
+                        <i class="fa-solid fa-moon header-text" id="dark-icon"></i>
+                        <i class="fa-solid fa-sun header-text" id="light-icon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="page-content" id="assignmentCheckPageContent">
+                <div class="assignment-info-header card-main-text">
+                    <p><strong>Дедлайн:</strong> <span id="checkPageAssignmentDeadline"></span></p>
+                    <p><a id="backToTasksLink" href="tasks.html" class="btn btn-secondary card-main-text"><i class="fas fa-arrow-left"></i> До списку завдань</a></p>
+                </div>
+
+                <div class="submissions-check-controls">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="submissionSearchInput" class="search-input card-main-text" placeholder="Пошук за студентом, групою...">
+                         <button class="clear-search" id="clearSubmissionSearch" style="display:none;"><i class="fas fa-times"></i></button>
+                    </div>
+                    <select id="submissionStatusFilter" class="filter-select card-main-text">
+                        <option value="">Всі статуси</option>
+                        <option value="На перевірці">На перевірці</option>
+                        <option value="Прийнято">Прийнято</option>
+                        <option value="Зараховано">Зараховано</option>
+                        <option value="Потребує доопрацювання">Потребує доопрацювання</option>
+                        <option value="Відхилено">Відхилено</option>
+                        <option value="Протерміновано">Протерміновано</option>
+                    </select>
+                    <select id="submissionSortFilter" class="filter-select card-main-text">
+                        <option value="upload_time_desc">Дата здачі (новіші)</option>
+                        <option value="upload_time_asc">Дата здачі (старіші)</option>
+                        <option value="student_name_asc">Студент (А-Я)</option>
+                        <option value="student_name_desc">Студент (Я-А)</option>
+                        <option value="submission_status_asc">Статус (А-Я)</option>
+                    </select>
+                </div>
+
+                <div id="assignmentSubmissionsTableContainer">
+                    <table class="submissions-table">
+                        <thead>
+                            <tr>
+                                <th>Студент</th>
+                                <th>Група</th>
+                                <th>Дата здачі</th>
+                                <th>Статус</th>
+                                <th>Оцінка</th>
+                                <th>Файл/Посилання</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assignmentSubmissionsTableBody">
+                            </tbody>
+                    </table>
+                    <p id="noSubmissionsMessage" class="no-results-message card-main-text" style="display: none;">По цьому завданню ще немає зданих робіт.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailedSubmissionReviewOverlay" class="task-form-overlay" style="display: none;">
+        <div class="task-detail-modal detailed-submission-review-modal">
+            <div class="task-details-modal-header">
+                <h3 id="detailedReviewTitle" class="task-details-title card-title">Детальна перевірка роботи</h3>
+                <button id="closeDetailedReviewModal" class="form-close card-main-text">&times;</button>
+            </div>
+            <div class="detailed-review-content-wrapper">
+                <div class="review-section review-section-info">
+                    <h4 class="review-section-title large-card-text">Загальна інформація</h4>
+                    <p class="card-main-text"><strong>Завдання:</strong> <span id="reviewAssignmentTitle"></span> (<a href="#" id="reviewAssignmentDetailsLink" target="_blank">деталі завдання</a>)</p>
+                    <p class="card-main-text"><strong>Студент:</strong> <span id="reviewStudentName"></span> (<span id="reviewStudentGroup"></span>)</p>
+                    <p class="card-main-text"><strong>Дата здачі:</strong> <span id="reviewSubmissionDate"></span></p>
+                    <p class="card-main-text"><strong>Поточний статус:</strong> <span id="reviewCurrentStatus" class="submission-status"></span></p>
+                    <p class="card-main-text"><strong>Поточна оцінка:</strong> <span id="reviewCurrentGrade"></span></p>
+                </div>
+
+                <div class="review-section review-section-submission-content">
+                    <h4 class="review-section-title large-card-text">Здана робота</h4>
+                    <div id="reviewSubmissionFileLink" class="card-main-text"></div>
+                    <div class="submission-versions-history">
+                        <h5 class="card-main-text">Історія версій (<span id="reviewVersionCount">0</span>):</h5>
+                        <ul id="reviewSubmissionVersionsList" class="card-main-text"></ul>
+                    </div>
+                </div>
+                
+                <div class="review-section review-section-grading">
+                    <h4 class="review-section-title large-card-text">Оцінювання та фідбек</h4>
+                    <div class="grading-form">
+                        <label for="submissionGradeInputHidden" class="card-main-text">Оцінка (0-10):</label>
+                        <div id="gradeStarsContainer" class="grade-stars card-main-text">
+                            </div>
+                        <input type="number" id="submissionGradeInputHidden" style="display:none;" min="0" max="10">
+                        
+                        <label for="submissionNewStatusSelect" class="card-main-text">Новий статус:</label>
+                        <select id="submissionNewStatusSelect" class="filter-select card-main-text">
+                            <option value="На перевірці">На перевірці</option>
+                            <option value="Прийнято">Прийнято (з оцінкою)</option>
+                            <option value="Зараховано">Зараховано (без оцінки)</option>
+                            <option value="Потребує доопрацювання">Потребує доопрацювання</option>
+                            <option value="Відхилено">Відхилено</option>
+                        </select>
+
+                        <label for="supervisorCommentInput" class="card-main-text">Коментар викладача:</label>
+                        <textarea id="supervisorCommentInput" class="comment-input card-main-text" placeholder="Ваш коментар до роботи..."></textarea>
+                        
+                        <button id="saveSubmissionReviewBtn" class="btn btn-primary task-submit-btn card-main-text">Зберегти перевірку</button>
+                    </div>
+                </div>
+
+                <div class="review-section review-section-comments-history">
+                    <h4 class="review-section-title large-card-text">Історія коментарів (<span id="reviewCommentCount">0</span>)</h4>
+                    <div id="reviewSubmissionCommentsList" class="comment-list card-main-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="animation/authUtils.js"></script> <script type="module" src="animation/nav-bar.js"></script>
+    <script type="module" src="animation/assignment_check.js"></script>
+    <script type="module" src="animation/index_animation.js"></script>
+    <script type="module" src="animation/nav-bar.js"></script>
+</body>
+</html>

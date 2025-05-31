@@ -1,0 +1,934 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Geist', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+
+.sidebar {
+  flex-shrink: 0;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
+}
+
+.main-header {
+  flex-shrink: 0;
+}
+
+.admin-content {
+    padding: var(--spacing-lg, 1.5rem) var(--spacing-xl, 2rem);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    width: 100%;
+    flex-grow: 1;
+}
+
+@layer tabs {
+  .tabs-container {
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      overflow: visible;
+      margin-top: 0;
+      margin-bottom: var(--spacing-lg, 1.5rem);
+  }
+
+  .tab-buttons {
+      display: flex;
+      background-color: transparent;
+      border-bottom: none;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm, 0.75rem); 
+      padding: var(--spacing-xs, 0.25rem);
+      margin-bottom: 1rem;
+  }
+
+  .tab-button {
+    padding: var(--spacing-md, 0.75rem) var(--spacing-xl, 1.5rem);
+    cursor: pointer;
+    background-color: var(--glass-bg, rgba(255, 255, 255, 0.1)); 
+    backdrop-filter: blur(var(--glass-blur, 8px));
+    -webkit-backdrop-filter: blur(var(--glass-blur, 8px)); 
+    border: 1px solid var(--glass-border-color, rgba(255, 255, 255, 0.18)); 
+    color: var(--glass-text-color, var(--color-text)); 
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border-radius: var(--button-radius-large, 24px);
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-width: max-content;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm, 0.5rem);
+    box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.1)); 
+    font-size: var(--font-size-sm, 0.875rem);
+  }
+
+  .tab-button i {
+    font-size: var(--font-size-md, 1rem);
+    opacity: 0.9; 
+  }
+
+  .tab-button:hover {
+      background-color: var(--glass-bg-hover, rgba(255, 255, 255, 0.2));
+      border-color: var(--glass-border-color-hover, rgba(255, 255, 255, 0.25));
+      color: var(--glass-text-color-hover, var(--color-text-primary));
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: var(--shadow-md, 0 4px 8px rgba(0,0,0,0.15));
+      scale: 1; 
+  }
+
+  .tab-button.active {
+    color: var(--button-text-primary-contrast, white);
+    background-color: var(--color-primary); 
+    backdrop-filter: none; 
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--color-primary);
+    font-weight: 600;
+    box-shadow: var(--shadow-lg-primary, 0 5px 15px rgba(83, 109, 254, 0.3));
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  [data-theme='light'] .tab-button:not(.active) {
+    background-color: var(--glass-bg-light, rgba(255, 255, 255, 0.25));
+    backdrop-filter: blur(var(--glass-blur-light, 10px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-light, 10px));
+    border: 1px solid var(--glass-border-color-light, rgba(255, 255, 255, 0.3));
+    color: var(--color-text-secondary-light, #4a4a4a);
+  }
+   [data-theme='light'] .tab-button:not(.active):hover {
+      background-color: var(--glass-bg-hover-light, rgba(255, 255, 255, 0.4));
+      border-color: var(--glass-border-color-hover-light, rgba(255, 255, 255, 0.4));
+      color: var(--color-text-primary-light, #222);
+  }
+
+  [data-theme='dark'] .tab-button:not(.active) {
+    background-color: var(--glass-bg-dark, rgba(40, 40, 40, 0.25)); 
+    backdrop-filter: blur(var(--glass-blur-dark, 10px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-dark, 10px));
+    border: 1px solid var(--glass-border-color-dark, rgba(255, 255, 255, 0.1));
+    color: var(--color-text-secondary-dark, #c0c0c0);
+  }
+  [data-theme='dark'] .tab-button:not(.active):hover {
+      background-color: var(--glass-bg-hover-dark, rgba(55, 55, 55, 0.4));
+      border-color: var(--glass-border-color-hover-dark, rgba(255, 255, 255, 0.15));
+      color: var(--color-text-primary-dark, #f0f0f0);
+  }
+
+  [data-theme='light'] .tab-button.active {
+    color: var(--button-text-primary-contrast, white);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  [data-theme='dark'] .tab-button.active {
+    color: var(--button-text-primary-contrast-dark, white);
+    background-color: var(--color-primary-dark-theme, var(--color-primary)); 
+    border-color: var(--color-primary-dark-theme, var(--color-primary));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .tab-content.active {
+      display: block;
+  }
+
+  @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+  }
+
+  .content-title {
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 0.5rem;
+  }
+}
+
+@layer forms {
+  .admin-form {
+      max-width: 600px;
+      margin: 0 auto;
+  }
+
+  .form-group input {
+    background-color: var(--secondary-bg-color);
+  }
+
+  .admin-form .form-group {
+      margin-bottom: 1.5rem;
+  }
+
+  .admin-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+  }
+
+  .admin-form input[type="text"],
+  .admin-form input[type="email"],
+  .admin-form input[type="tel"],
+  .admin-form input[type="password"],
+  .admin-form select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--card-radius, 0.5rem);
+      border: 1px solid var(--color-border);
+      background-color: var(--main-bg-color);
+      backdrop-filter: blur(10px);
+      color: var(--color-text);
+      transition: all 0.3s ease;
+  }
+
+  .admin-form input:focus,
+  .admin-form select:focus {
+      border-color: var(--color-primary);
+      outline: none;
+      box-shadow: var(--blue-shadow);
+  }
+}
+
+@layer buttons {
+  .submit-button, .simple-button {
+      padding: 0.75rem 1.5rem;
+      background-color: var(--color-primary);
+      color: var(--button-text);
+      border: none;
+      border-radius: var(--card-radius, 0.5rem);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+
+  .submit-button:hover, .simple-button:hover {
+      opacity: 0.9;
+      box-shadow: var(--blue-shadow);
+      transform: translateY(-2px);
+  }
+
+  .simple-button {
+      background-color: var(--color-secondary);
+  }
+  .simple-button:hover {
+       background-color: var(--color-text-light);
+       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  td .action-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin: 0 0.3rem;
+      padding: 0.3rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+  }
+
+  td .action-button i {
+       color: var(--color-text-light);
+       transition: color 0.2s;
+  }
+
+  td .action-button.edit-btn:hover { background-color: var(--very-light-blue); }
+  td .action-button.edit-btn:hover i { color: var(--color-info); }
+
+  td .action-button.status-btn.active-status:hover { background-color: var(--very-light-red); }
+  td .action-button.status-btn.active-status:hover i { color: var(--color-danger); }
+
+  td .action-button.status-btn.inactive-status:hover { background-color: var(--very-light-neutral); }
+  td .action-button.status-btn.inactive-status:hover i { color: var(--color-success); }
+
+  td .action-button.delete-btn:hover { background-color: var(--very-light-red); }
+  td .action-button.delete-btn:hover i { color: var(--color-danger); }
+}
+
+@layer tables {
+  .table-container {
+      overflow-x: auto;
+      margin-top: 1rem;
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+  }
+
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--main-bg-color);
+  }
+
+  th, td {
+      padding: 0.7rem;
+      text-align: left;
+      border-bottom: var(--card-border);
+      white-space: normal;
+      overflow-wrap: break-word;
+      color: var(--color-text);
+  }
+
+  #students-table th:nth-child(2),
+  #students-table td:nth-child(2) {
+      max-width: 25ch;
+      width: 25%;
+  }
+
+  #students-table th:nth-child(3),
+  #students-table td:nth-child(3) {
+      max-width: 30ch;
+      width: 30%;
+  }
+
+  #teachers-table th:nth-child(2),
+  #teachers-table td:nth-child(2) {
+      max-width: 25ch;
+      width: 25%;
+  }
+
+  #teachers-table th:nth-child(3),
+  #teachers-table td:nth-child(3) {
+      max-width: 30ch;
+      width: 30%;
+  }
+
+  #admins-table th:nth-child(2),
+  #admins-table td:nth-child(2) {
+      max-width: 30ch;
+      width: 35%;
+  }
+
+  th {
+      background-color: var(--secondary-bg-color);
+      font-weight: 600;
+      color: var(--text-primary);
+  }
+
+  tbody tr:hover {
+      background-color: var(--hover-bg);
+  }
+
+  .status-active {
+      color: var(--color-success);
+      font-weight: bold;
+  }
+
+  .status-inactive {
+      color: var(--color-secondary);
+      font-style: italic;
+  }
+}
+
+@layer actions {
+  .actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--main-bg-color);
+    backdrop-filter: blur(10px);
+    color: var(--color-text);
+    transition: all 0.3s;
+  }
+
+  .search-input:focus,
+  .search-input:hover {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: var(--blue-shadow);
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-light);
+  }
+}
+
+@layer pagination {
+  .pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1.5rem;
+      gap: 1rem;
+  }
+
+  .pagination-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      background-color: var(--color-primary) !important;
+      color: var(--button-text);
+      border: var(--card-border);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+
+  .pagination-btn:hover {
+      box-shadow: var(--blue-shadow);
+      transform: scale(1.02);
+  }
+
+  .page-info {
+      font-weight: 500;
+      color: var(--color-text);
+  }
+}
+
+@layer modal {
+  .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      animation: fadeInModal 0.3s ease-out;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .modal-content {
+      background-color: var(--card-bg);
+      margin: auto;
+      padding: 2rem;
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+      width: 80%;
+      max-width: 600px;
+      box-shadow: var(--shadow-lg, 0 10px 25px rgba(0, 0, 0, 0.1));
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      max-height: 85vh;
+      overflow-y: auto;
+  }
+
+  .close-button {
+      color: var(--color-text-light);
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s;
+  }
+
+  .close-button:hover,
+  .close-button:focus {
+      color: var(--text-primary);
+      text-decoration: none;
+  }
+
+  #modalTitle {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+  }
+
+  #editForm .form-group {
+      margin-bottom: 1rem;
+  }
+
+  #editForm .user-type-specific label {
+       margin-top: 0.8rem;
+  }
+
+  @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+}
+
+@layer utilities {
+
+  .fa-sync-alt, .ref {
+    color: var(--button-text);
+  }
+
+  #refresh-students, #refresh-teachers, #refresh-admins {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #2563eb 100%);
+    backdrop-filter: blur(5px);
+    border: var(--card-border);
+    border-radius: 24px;
+    color: var(--color-text);
+    cursor: pointer;
+    box-shadow: var(--little-blue-shadow);
+    transition: all 0.3s ease;
+  }
+
+  #refresh-students:hover,
+  #refresh-teachers:hover,
+  #refresh-admins:hover {
+    box-shadow: var(--blue-shadow);
+    transform: scale(1.01);
+  }
+
+  #refresh-students.active,
+  #refresh-teachers.active,
+  #refresh-admins.active {
+    transform: scale(1.02);
+    box-shadow: var(--blue-shadow);
+    color: var(--button-text);
+  }
+
+  .info-text {
+      color: var(--color-text-light);
+      margin-bottom: 1rem;
+  }
+  .small-text {
+       margin-top: 0.2rem;
+       color: var(--color-text-light);
+  }
+
+  .form-message {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 0.3rem;
+      display: none;
+  }
+  .form-message.success {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--color-success);
+      border: 1px solid var(--color-success);
+      display: block;
+  }
+}
+
+@layer admin-forms-custom {
+  .tab-content > .card .admin-form-title,
+  #editModal .modal-content #modalTitle {
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg, 24px);
+    padding-bottom: var(--spacing-md, 16px);
+    border-bottom: 1px solid var(--color-border);
+    --font-level: 1;
+  }
+
+  #createStudentForm .form-group,
+  #createTeacherForm .form-group,
+  #createAdminForm .form-group,
+  #editForm .form-group {
+    margin-bottom: var(--spacing-lg, 20px);
+  }
+
+  #createStudentForm label,
+  #createTeacherForm label,
+  #createAdminForm label,
+  #editForm label {
+    display: block;
+    margin-bottom: var(--spacing-sm, 8px);
+    font-weight: 500;
+    color: var(--color-text);
+    font-family: 'Geist', sans-serif;
+    --font-level: 0.06;
+  }
+
+  #createStudentForm input[type="text"],
+  #createStudentForm input[type="email"],
+  #createStudentForm input[type="password"],
+  #createStudentForm select,
+  #createTeacherForm input[type="text"],
+  #createTeacherForm input[type="email"],
+  #createTeacherForm input[type="tel"],
+  #createTeacherForm input[type="password"],
+  #createTeacherForm select,
+  #createTeacherForm textarea,
+  #createAdminForm input[type="email"],
+  #createAdminForm input[type="password"],
+  #createAdminForm select,
+  #editForm input[type="text"],
+  #editForm input[type="email"],
+  #editForm input[type="tel"],
+  #editForm input[type="password"],
+  #editForm select,
+  #editForm textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--main-bg-color);
+    backdrop-filter: blur(10px);
+    color: var(--color-text);
+    transition: all 0.3s ease;
+    box-shadow: var(--little-blue-shadow);
+    font-family: 'Geist', sans-serif;
+    --font-level: 0.05;
+  }
+
+  #createStudentForm input[type="text"]:focus,
+  #createStudentForm input[type="email"]:focus,
+  #createStudentForm input[type="password"]:focus,
+  #createStudentForm select:focus,
+  #createTeacherForm input[type="text"]:focus,
+  #createTeacherForm input[type="email"]:focus,
+  #createTeacherForm input[type="tel"]:focus,
+  #createTeacherForm input[type="password"]:focus,
+  #createTeacherForm select:focus,
+  #createTeacherForm textarea:focus,
+  #createAdminForm input[type="email"]:focus,
+  #createAdminForm input[type="password"]:focus,
+  #createAdminForm select:focus,
+  #editForm input[type="text"]:focus,
+  #editForm input[type="email"]:focus,
+  #editForm input[type="tel"]:focus,
+  #editForm input[type="password"]:focus,
+  #editForm select:focus,
+  #editForm textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--blue-shadow);
+  }
+
+  #createStudentForm input.invalid,
+  #createTeacherForm input.invalid,
+  #createAdminForm input.invalid,
+  #editForm input.invalid,
+  #createStudentForm textarea.invalid,
+  #createTeacherForm textarea.invalid,
+  #createAdminForm textarea.invalid,
+  #editForm textarea.invalid {
+    border-color: var(--color-danger) !important;
+    box-shadow: var(--little-red-shadow) !important;
+  }
+
+  #createStudentForm button[type="submit"],
+  #createTeacherForm button[type="submit"],
+  #createAdminForm button[type="submit"],
+  #editForm button[type="submit"] {
+    padding: 12px 24px;
+    background-color: var(--color-primary);
+    color: var(--button-text, white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm, 8px);
+    box-shadow: var(--little-blue-shadow);
+    font-family: 'Geist', sans-serif;
+    --font-level: 0.07;
+  }
+
+  #createStudentForm button[type="submit"]:hover,
+  #createTeacherForm button[type="submit"]:hover,
+  #createAdminForm button[type="submit"]:hover,
+  #editForm button[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--blue-shadow);
+  }
+
+  #createStudentForm button[type="submit"]:disabled,
+  #createTeacherForm button[type="submit"]:disabled,
+  #createAdminForm button[type="submit"]:disabled,
+  #editForm button[type="submit"]:disabled {
+    background-color: var(--color-secondary);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  #createStudentForm button[type="submit"] .fa-spinner,
+  #createTeacherForm button[type="submit"] .fa-spinner,
+  #createAdminForm button[type="submit"] .fa-spinner,
+  #editForm button[type="submit"] .fa-spinner {
+    font-size: 1em;
+    color: currentColor;
+  }
+
+  .form-message {
+    padding: var(--spacing-md, 16px);
+    border-radius: 8px;
+    margin-top: var(--spacing-md, 16px);
+    margin-bottom: var(--spacing-md, 16px);
+    border-width: 1px;
+    border-style: solid;
+    font-family: 'Geist', sans-serif;
+  }
+
+  .form-message.success {
+    background-color: var(--very-light-blue);
+    border-color: var(--color-success);
+    color: var(--color-success);
+  }
+
+  .form-message.error {
+    background-color: var(--very-light-red);
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+  }
+
+  .error-message.visible {
+    margin-top: var(--spacing-sm, 8px) !important;
+    padding: var(--spacing-sm, 8px);
+    background-color: var(--very-light-red);
+    border-radius: 4px;
+    border-left: 3px solid var(--color-danger);
+    display: block;
+  }
+
+  #editModal .modal-content {
+    max-width: 700px;
+    padding: var(--spacing-lg, 24px);
+    animation: fadeInModal 0.3s ease-out, slideUp 0.4s ease;
+    max-height: 85vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  #edit-profile-fields,
+  #edit-student-fields,
+  #edit-teacher-fields,
+  #edit-admin-fields {
+    padding: var(--spacing-md, 16px);
+    margin-top: var(--spacing-lg, 24px);
+    border-left: 3px solid var(--color-primary-light);
+    background-color: rgba(0,0,0,0.02);
+    border-radius: 0 var(--card-radius) var(--card-radius) 0;
+  }
+
+  [data-theme='dark'] #edit-profile-fields,
+  [data-theme='dark'] #edit-student-fields,
+  [data-theme='dark'] #edit-teacher-fields,
+  [data-theme='dark'] #edit-admin-fields {
+    background-color: rgba(255,255,255,0.03);
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  #edit-studygroupid option,
+  #edit-supervisorid-student option,
+  #createStudentForm select option,
+  #createTeacherForm select option,
+  #createAdminForm select option,
+  #editForm select option {
+    color: var(--text-primary);
+    padding: 10px;
+    transition: all 0.3s;
+  }
+
+  [data-theme='dark'] #edit-studygroupid option,
+  [data-theme='dark'] #edit-supervisorid-student option,
+  [data-theme='dark'] #createStudentForm select option,
+  [data-theme='dark'] #createTeacherForm select option,
+  [data-theme='dark'] #createAdminForm select option,
+  [data-theme='dark'] #editForm select option {
+    background: rgba(0, 0, 0, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  [data-theme='light'] #edit-studygroupid option,
+  [data-theme='light'] #edit-supervisorid-student option,
+  [data-theme='light'] #createStudentForm select option,
+  [data-theme='light'] #createTeacherForm select option,
+  [data-theme='light'] #createAdminForm select option,
+  [data-theme='light'] #editForm select option {
+    background: var(--main-bg-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  #edit-studygroupid option:hover,
+  #edit-supervisorid-student option:hover,
+  #createStudentForm select option:hover,
+  #createTeacherForm select option:hover,
+  #createAdminForm select option:hover,
+  #editForm select option:hover {
+    background: var(--light-blue-hover-bg);
+  }
+}
+
+@layer responsive {
+  @media (max-width: 768px) {
+      .admin-content {
+          padding-left: var(--spacing-md, 1rem);
+          padding-right: var(--spacing-md, 1rem);
+      }
+      .tab-buttons {
+          justify-content: flex-start;
+      }
+       .tab-button {
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: auto;
+          min-width: unset;
+          padding: var(--spacing-sm, 0.6rem) var(--spacing-md, 1rem);
+      }
+      .tab-content-area {
+          padding: 1.5rem;
+          border: 1px solid var(--color-border);
+          background-color: var(--main-bg-color);
+          backdrop-filter: blur(10px);
+      }
+      .actions-bar {
+           flex-direction: column;
+           align-items: stretch;
+      }
+      .search-input {
+           min-width: unset;
+           width: 100%;
+      }
+      .modal-content {
+           width: 90%;
+           margin: auto;
+           padding: 1.5rem;
+           max-height: 90vh;
+      }
+      #editModal .modal-content {
+           width: 90%;
+           margin: auto;
+           padding: 1.5rem;
+           max-height: 90vh;
+      }
+
+      th, td {
+          padding: 0.8rem;
+          white-space: normal;
+      }
+
+      #students-table th:nth-child(2), #students-table td:nth-child(2),
+      #teachers-table th:nth-child(2), #teachers-table td:nth-child(2) {
+          max-width: 18ch;
+          width: 30%;
+      }
+      #students-table th:nth-child(3), #students-table td:nth-child(3),
+      #teachers-table th:nth-child(3), #teachers-table td:nth-child(3),
+      #admins-table th:nth-child(2), #admins-table td:nth-child(2) {
+          max-width: 20ch;
+          width: 35%;
+      }
+
+      #students-table th:nth-child(4), #students-table td:nth-child(4),
+      #teachers-table th:nth-child(4), #teachers-table td:nth-child(4),
+      #teachers-table th:nth-child(5), #teachers-table td:nth-child(5),
+      #admins-table th:nth-child(3), #admins-table td:nth-child(3),
+      #admins-table th:nth-child(4), #admins-table td:nth-child(4) {
+          display: none;
+      }
+  }
+
+  @media (max-width: 480px) {
+      .tab-button {
+          padding: var(--spacing-xs, 0.5rem) var(--spacing-sm, 0.8rem);
+          font-size: var(--font-size-xs, 0.75rem);
+      }
+      .tab-button i {
+          font-size: var(--font-size-sm, 0.875rem);
+      }
+      .tab-content-area {
+          padding: 1rem;
+      }
+       th, td {
+          padding: 0.6rem;
+      }
+      .submit-button, .simple-button {
+          width: 100%;
+          justify-content: center;
+          margin-top: 0.5rem;
+          padding: 0.6rem 1rem;
+      }
+      .modal-content {
+          padding: 1rem;
+          width: 95%;
+          max-height: 95vh;
+          margin: auto;
+      }
+      #editModal .modal-content {
+          padding: 1rem;
+          width: 95%;
+          max-height: 95vh;
+          margin: auto;
+      }
+
+      #students-table th:nth-child(2), #students-table td:nth-child(2),
+      #teachers-table th:nth-child(2), #teachers-table td:nth-child(2) {
+          max-width: 12ch;
+          width: 40%;
+      }
+      #students-table th:nth-child(3), #students-table td:nth-child(3),
+      #teachers-table th:nth-child(3), #teachers-table td:nth-child(3),
+      #admins-table th:nth-child(2), #admins-table td:nth-child(2) {
+          max-width: 15ch;
+          width: 45%;
+      }
+
+      .pagination-controls button {
+          padding: 0.4rem 0.8rem;
+      }
+      .search-input {
+          padding: 0.5rem 0.8rem;
+      }
+  }
+}

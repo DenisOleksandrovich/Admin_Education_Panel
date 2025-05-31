@@ -1,0 +1,203 @@
+.assignment-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--main-bg-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--little-blue-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.assignment-info-header p {
+    margin: 0;
+}
+
+.submissions-check-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    padding: 15px;
+    background-color: var(--main-bg-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--little-blue-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.submissions-check-controls .search-input-wrapper {
+    flex-grow: 2;
+    min-width: 250px;
+}
+
+.submissions-check-controls .filter-select {
+    flex-grow: 1;
+    min-width: 150px;
+    max-width: 200px; 
+}
+
+#assignmentSubmissionsTableContainer {
+    background-color: var(--color-card);
+    padding: 20px;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow-x: auto; 
+    background-color: var(--main-bg-color);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+}
+
+tbody, #assignmentSubmissionsTableBody {
+    transition: all 0.3s ease;
+}
+
+tbody:hover, #assignmentSubmissionsTableBody:hover {
+    background-color: var(--little-blue-hover);
+}
+
+.submissions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.submissions-table th,
+.submissions-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.submissions-table th {
+    background-color: var(--blue-hover-bg); 
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.submissions-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.submissions-table tbody tr:hover {
+    background-color: var(--blue-hover-bg);
+}
+
+.submissions-table .submission-status { 
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    min-width: 120px; 
+    display: inline-block;
+}
+
+.submissions-table .task-action-button {
+    padding: 6px; 
+    width: auto; 
+    height: auto;
+    border-radius: 50%; 
+}
+
+.search-input-wrapper input {
+    padding-left: 40px;
+}
+
+.file-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+.file-link a:hover {
+    text-decoration: underline;
+}
+
+.no-results-message {
+    text-align: center;
+    padding: 20px;
+    color: var(--color-text-light);
+}
+
+.detailed-submission-review-modal {
+    max-width: 750px; 
+    width: 90%;
+}
+.detailed-review-content-wrapper {
+    max-height: calc(90vh - 120px); 
+    overflow-y: auto;
+    padding-right: 15px; 
+    padding-left: 15px;
+}
+
+
+.review-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed var(--color-border-light);
+}
+.review-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.review-section-title {
+    margin-bottom: 12px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+#reviewSubmissionFileLink a {
+    color: var(--primary-color);
+    font-weight: 500;
+    word-break: break-all;
+}
+.submission-versions-history {
+    margin-top: 15px;
+    background-color: var(--main-bg-color);
+    padding: 10px;
+    border-radius: 6px;
+}
+.submission-versions-history h5 { margin-bottom: 8px; font-weight: 500; }
+#reviewSubmissionVersionsList { list-style-type: none; padding-left: 0; }
+#reviewSubmissionVersionsList li { margin-bottom: 6px; padding: 5px; border-bottom: 1px solid var(--color-border-light); }
+#reviewSubmissionVersionsList li:last-child { border-bottom: none; }
+#reviewSubmissionVersionsList li a { color: var(--primary-color); }
+
+
+.grading-form label { display: block; margin-top: 12px; margin-bottom: 6px; font-weight: 500;}
+.grading-form .filter-select, 
+.grading-form .comment-input { /* textarea */
+    width: 100%; 
+    margin-bottom:15px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+}
+.grading-form .comment-input {
+    min-height: 80px;
+}
+
+
+.grade-stars { display: flex; gap: 5px; margin-bottom: 15px; cursor:pointer;}
+.grade-star { color: var(--color-border); transition: color 0.2s; }
+.grade-star.hovered, .grade-star.selected { color: #ffc107; }
+
+#reviewSubmissionCommentsList {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: var(--main-bg-color);
+    border-radius: 6px;
+}
+#reviewSubmissionCommentsList .comment-item { 
+    background-color: var(--secondary-bg-color); 
+    border: 1px solid var(--color-border-light);
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+#reviewAssignmentDetailsLink {
+    margin-left: 5px;
+}
